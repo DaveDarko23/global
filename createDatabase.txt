@@ -1,0 +1,59 @@
+create table Usuario (
+  PK_Usuario int PRIMARY KEY AUTO_INCREMENT,
+  Correo varchar (50) CHARACTER SET utf8,
+  Username varchar (50) CHARACTER SET utf8,
+  password varchar (50),
+  nombre varchar (50) CHARACTER SET utf8,
+  apellido varchar (50) CHARACTER SET utf8
+);
+
+create table Vendedor (
+  PK_Administrador int PRIMARY KEY AUTO_INCREMENT,
+  FK_Usuario int,
+  FOREIGN KEY (FK_Usuario) REFERENCES Usuario(PK_Usuario)
+);
+
+create table Entidad (
+  PK_Estado int PRIMARY KEY AUTO_INCREMENT,
+  Nombre varchar (20)
+);
+
+create table Comprador (
+  PK_Comprador int PRIMARY KEY AUTO_INCREMENT,
+  FK_Usuario int,
+  FK_Estado int,
+  domicilio varchar (200) CHARACTER SET utf8,
+  FOREIGN KEY (FK_Usuario) REFERENCES Usuario(PK_Usuario),
+  FOREIGN KEY (FK_Estado) REFERENCES Entidad(PK_Estado)
+);
+
+create table Producto (
+  PK_Producto int PRIMARY KEY AUTO_INCREMENT,
+  Imagen varchar (100),
+  Nombre varchar (100) CHARACTER SET utf8,
+  Descripcion varchar (1000) CHARACTER SET utf8,
+  precio float,
+  stock int,
+  FK_Vendedor int,
+  FOREIGN KEY (FK_Vendedor) REFERENCES Vendedor(PK_Administrador)
+);
+
+create table carrito (
+  PK_Carrito int PRIMARY KEY AUTO_INCREMENT,
+  cantidad int,
+  Status boolean,
+  FK_Usuario int, 
+  FK_Producto int,
+  FOREIGN KEY (FK_Usuario) REFERENCES Comprador(PK_Comprador),
+  FOREIGN KEY (FK_Producto) REFERENCES Producto(PK_Producto)
+);
+
+create table Deseos (
+  PK_Deseos int PRIMARY KEY AUTO_INCREMENT,
+  FK_Usuario int, 
+  FK_Producto int,
+  FOREIGN KEY (FK_Usuario) REFERENCES Comprador(PK_Comprador),
+  FOREIGN KEY (FK_Producto) REFERENCES Producto(PK_Producto)
+);
+
+ALTER TABLE Producto CHANGE COLUMN PK_Imagen PK_Producto int PRIMARY KEY AUTO_INCREMENT;
