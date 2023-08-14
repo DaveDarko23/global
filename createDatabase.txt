@@ -57,3 +57,7 @@ create table Deseos (
 );
 
 ALTER TABLE Producto CHANGE COLUMN PK_Imagen PK_Producto int PRIMARY KEY AUTO_INCREMENT;
+
+ALTER TABLE producto ADD categoria varchar (50) after stock;
+
+UPDATE producto SET categoria = "Tecnologia";

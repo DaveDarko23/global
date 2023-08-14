@@ -1,6 +1,6 @@
 <?php
   $hostname = 'localhost';
-  $database = 'savemeuser';
+  $database = 'comercioglobal';
   $username = 'root';
   $password = '';
 

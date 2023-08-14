@@ -1,0 +1,25 @@
+.input-text{
+  margin-bottom: 1rem;
+  width: 80%;
+  height: 2rem;
+  padding: 0 1rem;
+  border-radius: .5rem;
+  border-style: solid;
+  border-color: #0005;
+}
+
+.button{
+  width: 80%;
+  height: 2rem;
+  background-color: aliceblue;
+  border-radius: .5rem;
+  border-color: #0005;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+a{
+  color: black;
+  text-decoration: none;
+}

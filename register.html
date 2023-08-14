@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comercio</title>
+    <link rel="stylesheet" href="css/styles-reset.css" />
+    <link rel="stylesheet" href="css/styles-login.css" />
+    <link rel="stylesheet" href="css/styles-input.css" />
+  </head>
+  <body>
+    <section class="section-login">
+      <h1>Comercio Global</h1>
+      <div>
+        <h2>Crear una cuenta</h2>
+        <p>
+          Registrate y comienza a explorar todos los productos que te están
+          esperando
+        </p>
+      </div>
+      <form class="login-form">
+        <input
+          class="input-text"
+          type="text"
+          name="email"
+          placeholder="Correo Electronico"
+          required
+        />
+        <input
+          class="input-text"
+          type="text"
+          name="username"
+          placeholder="Nombre"
+          required
+        />
+        <input
+          class="input-text"
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          required
+        />
+        <input
+          class="input-text"
+          type="text"
+          name="name"
+          placeholder="Nombre"
+          required
+        />
+        <input
+          class="input-text"
+          type="text"
+          name="last-name"
+          placeholder="Apellido"
+          required
+        />
+        <select name="type" class="input-text">
+          <option value="Comprador" selected>Comprador</option>
+          <option value="Vendedor">Vendedor</option>
+        </select>
+        <input class="button" type="submit" value="Registrarme" />
+        <input type="hidden" name="id" />
+      </form>
+      <div>
+        <h3>¿Ya tienes una cuenta?</h3>
+        <button class="button" id="logIn">
+          <b>Iniciar Sesión</b>
+        </button>
+      </div>
+    </section>
+  </body>
+</html>
+
+<script src="js/modules/register.js" type="module"></script>

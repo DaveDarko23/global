@@ -1,0 +1,44 @@
+.section-add-product{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.section-img{
+  width: 50%;
+  height: 84.5vh;
+  background-image: url("../img/login-background.jpg");
+  background-size: cover;  
+
+}
+
+.section-form{
+  width: 50%;
+  padding: 2rem 5rem;
+}
+
+.file-class{
+  position: relative;
+  width: 80%;
+  height: 2rem;
+  border-radius: .5rem;
+  border-color: #0005;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  background-color: #2499e3;
+}
+
+.p-file{
+  text-align: center;
+  color: white;
+}
+
+.input-file{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  cursor: pointer;
+}

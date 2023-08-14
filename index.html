@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comercio</title>
-</head>
-<body>
-  <h1>Comida Rica</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comercio</title>
+    <link rel="stylesheet" href="css/styles-reset.css" />
+    <link rel="stylesheet" href="css/styles-login.css" />
+    <link rel="stylesheet" href="css/styles-input.css" />
+  </head>
+  <body>
+    <section class="section-login">
+      <h1>Comercio Global</h1>
+      <div>
+        <h2>Iniciar Sesión</h2>
+        <p>Inicia Sesión comenzar a buscar ese producto que tanto necesitas.</p>
+      </div>
+      <form class="login-form">
+        <input
+          class="input-text"
+          type="text"
+          name="username"
+          placeholder="Nombre"
+          required
+        />
+        <input
+          class="input-text"
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          required
+        />
+        <input class="button" id="logIn" type="submit" value="Iniciar Sesión" />
+        <input type="hidden" name="id" />
+      </form>
+      <div>
+        <h3>¿Aun no tienes una cuenta?</h3>
+        <button class="button" id="signUp">
+          <b>Registrate Aquí</b>
+        </button>
+      </div>
+    </section>
+  </body>
 </html>
+
+<script src="js/modules/login.js" type="module"></script>
