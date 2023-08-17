@@ -3,37 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <link rel="stylesheet" href="css/styles-reset.css" />
     <link rel="stylesheet" href="css/styles-header.css" />
     <link rel="stylesheet" href="css/styles-dashboard.css" />
     <link rel="stylesheet" href="css/styles-input.css" />
-
-    <title>Document</title>
   </head>
   <body>
     <header class="header">
       <h1>Comercio Global</h1>
       <nav>
-        <ul class="header-nav">
-          <li class="nav-header" id="home">Home</li>
-          <li class="nav-header" id="carrito">Carrito</li>
-          <li class="nav-header" id="deseos">Mis Deseos</li>
-          <li class="nav-header" id="compras">Mis compras</li>
-        </ul>
+        <ul class="header-nav"></ul>
       </nav>
     </header>
-    <section>
-      <h2>Busca lo que necesites dentro de nuestro extenso catalogo</h2>
-    </section>
     <section class="section-product"></section>
   </body>
-
-  <template id="template-card">
-    <figure class="card">
-      <img />
-      <figcaption></figcaption>
-    </figure>
-  </template>
 
   <template id="card-template">
     <card class="card">
@@ -52,12 +36,11 @@
         </div>
       </section>
       <section class="product-buttons">
-        <h5>Agregar a:</h5>
-        <button class="button" id="carrito">Carrito</button>
-        <button class="button" id="deseos">Deseos</button>
+        <h5></h5>
+        <a target="_blank">ver PDF</a>
       </section>
     </card>
   </template>
 
-  <script src="js/modules/dashboard.js" type="module"></script>
+  <script src="js/modules/compras.js" type="module"></script>
 </html>

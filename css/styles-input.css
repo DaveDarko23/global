@@ -1,5 +1,6 @@
 .input-text{
   margin-bottom: 1rem;
+  
   width: 80%;
   height: 2rem;
   padding: 0 1rem;
@@ -22,4 +23,31 @@
 a{
   color: black;
   text-decoration: none;
+}
+
+.carrito-quantity{
+  border-top: thin solid black;
+  border-bottom: thin solid black;
+}
+
+.carrito-quantity{
+  display: flex;
+}
+
+.square-button{
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: aqua;
+  border: none;
+  border-right: thin solid black;
+  border-left: thin solid black;
+  cursor: pointer;
+}
+
+.square-value{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.5rem;
+  width: 1.5rem;
 }

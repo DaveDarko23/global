@@ -31,6 +31,6 @@ $d.addEventListener("click", (e) => {
   const $button = $d.getElementById("logIn");
 
   if (e.target === $button) {
-    location.href = "http://192.168.100.6/Global/index.html";
+    location.href = "http://192.168.100.6/Global/login.html";
   }
 });

@@ -1,11 +1,17 @@
 import fetchAsync from "./asyncFetch.js";
+import navController, { clickListener } from "./navegacion.js";
 
 const $d = document;
 let statusType = "";
 
 $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
-  navController();
+
+  if (statusType !== "Comprador") {
+    location.href = "http://192.168.100.6/Global";
+  }
+
+  navController(statusType, $d);
 
   getProducts();
 });
@@ -16,11 +22,13 @@ const getProducts = () => {
     method: "POST",
     success: (userInfo) => {
       console.log(userInfo);
-      console.log(userInfo.producto);
-
+      if (userInfo.length === 0) {
+        alert("No tienes deseos");
+        return;
+      }
       fillCards(userInfo.producto);
     },
-    failed: () => alert("Usuario Incorrecto"),
+    failed: () => alert("Ocurrió un error"),
     data: JSON.stringify({
       FK_Usuario: localStorage.getItem("PK_Usuario"),
     }),
@@ -57,51 +65,41 @@ const cardsInteraction = () => {
   $cards.forEach(($card) => {
     $card.addEventListener("click", (e) => {
       const $carrito = $card.querySelector("#carrito");
-      const $deseos = $card.querySelector("#deseos");
+      const $delete = $card.querySelector("#delete");
+
+      let url = "",
+        color = "";
 
       if ($carrito === e.target) {
-        /*const Envio = {
-          url: "http://192.168.100.6/Global/scripts/dashboard.php",
-          method: "POST",
-          success: (userInfo) => {
-            console.log(userInfo);
-            console.log(userInfo.producto);
-
-            fillCards(userInfo.producto);
-          },
-          failed: () => alert("Usuario Incorrecto"),
-          data: null,
-        };*/
-        return;
+        url = "http://192.168.100.6/Global/scripts/addCarrito.php";
+        color = "#72cb10";
+      }
+      if ($delete === e.target) {
+        url = "http://192.168.100.6/Global/scripts/deleteDeseos.php";
+        color = "#ffff72";
       }
 
-      console.log(e.target);
-      console.log($card.getAttribute("id"));
+      if ($carrito === e.target || $delete === e.target) {
+        const Envio = {
+          url,
+          method: "POST",
+          success: (userInfo) => {
+            if (color === "#72cb10") $card.style.backgroundColor = color;
+            else $d.querySelector(".section-product").removeChild($card);
+          },
+          failed: () => alert("Usuario Incorrecto"),
+          data: JSON.stringify({
+            FK_Producto: $card.getAttribute("id"),
+            FK_Usuario: localStorage.getItem("PK_Type"),
+          }),
+        };
+
+        fetchAsync(Envio);
+      }
     });
   });
 };
 
-const navController = () => {
-  const $liDeseos = $d.querySelector("#deseos");
-  $liDeseos.addEventListener("click", (e) => {
-    location.href = `http://192.168.100.6/global/deseos.html`;
-  });
-
-  const $nav = $d.querySelector(".header-nav"),
-    $li = $d.createElement("li");
-  $li.classList.add("nav-header");
-
-  $li.textContent = statusType === null ? "Iniciar Sesión" : "Cerrar Sesión";
-
-  $nav.insertAdjacentElement("beforeend", $li);
-};
-
 $d.addEventListener("click", (e) => {
-  if (e.target.innerHTML === "Iniciar Sesión") {
-    location.href = "http://192.168.100.6/global";
-  }
-  if (e.target.innerHTML === "Cerrar Sesión") {
-    localStorage.clear();
-    location.reload();
-  }
+  clickListener(e);
 });

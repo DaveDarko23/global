@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles-reset.css" />
+    <link rel="stylesheet" href="css/styles-header.css" />
+    <link rel="stylesheet" href="css/styles-new-product.css" />
+    <link rel="stylesheet" href="css/styles-input.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Comercio Global</h1>
+      <nav>
+        <ul class="header-nav"></ul>
+      </nav>
+    </header>
+    <section class="section-add-product">
+      <!-- <section class="section-img"></section> -->
+      <img src="" alt="Imagen Producto" />
+      <section class="section-form">
+        <div>
+          <h2>Editar Producto</h2>
+          <p>Enseña al mundo el gran producto que tienes por ofrecer</p>
+          <br />
+        </div>
+        <form class="login-form">
+          <input
+            class="input-text"
+            type="text"
+            name="name"
+            placeholder="Nombre"
+            required
+          />
+          <input
+            class="input-text"
+            type="text"
+            name="descripcion"
+            placeholder="descripcion"
+            required
+          />
+          <input
+            class="input-text"
+            type="number"
+            name="precio"
+            placeholder="Precio"
+            required
+          />
+          <input
+            class="input-text"
+            type="number"
+            name="stock"
+            placeholder="stock"
+            required
+          />
+          <select class="input-text" name="categoria">
+            <option value="tecnologia">Tecnologia</option>
+            <option value="jardineria">Jardineria</option>
+            <option value="ropa">Ropa</option>
+            <option value="joyeria">Joyeria</option>
+            <option value="articulos-hogar">Articulos para el Hogar</option>
+          </select>
+
+          <input type="hidden" name="fk_vendedor" id="fk_vendedor" />
+
+          <div class="file-class">
+            <p class="p-file">Agregar Imagen</p>
+            <input name="archivo" type="file" class="input-file" />
+          </div>
+
+          <input
+            class="button"
+            id="logIn"
+            type="submit"
+            value="Agregar Producto"
+          />
+          <input type="hidden" name="id" />
+        </form>
+        <!-- <form action="http://192.168.100.6/global/scripts/getProducts.php" method="POST" enctype="multipart/form-data"/>
+          <input name="archivo" id="archivo" type="file"/>
+          <input type="submit" name="subir" value="Subir imagen"/>
+        </form> -->
+      </section>
+    </section>
+  </body>
+
+  <script src="js/modules/editProduct.js" type="module"></script>
+</html>

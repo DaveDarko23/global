@@ -1,0 +1,27 @@
+.section-buy{
+  padding: 2vh;
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin: auto;
+}
+
+.info-buy{
+  width: 70%;
+}
+
+.button-buy{
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.estados-form{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

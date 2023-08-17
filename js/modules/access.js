@@ -4,5 +4,5 @@ export default function access(userInfo) {
   localStorage.setItem("username", userInfo.username);
   localStorage.setItem("userType", userInfo.userType);
 
-  location.href = "http://192.168.100.6/Global/dashboard.html";
+  location.href = "http://192.168.100.6/Global";
 }

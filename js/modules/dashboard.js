@@ -1,44 +1,75 @@
 import fetchAsync from "./asyncFetch.js";
+import navController, { clickListener } from "./navegacion.js";
 
 const $d = document;
 let statusType = "";
 
 $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
-  navController();
+  navController(statusType, $d);
 
-  getProducts();
+  if (statusType === "Vendedor") {
+    getProducts(
+      "sellerDashboard.php",
+      JSON.stringify({ PK_Vendedor: localStorage.getItem("PK_Type") })
+    );
+  } else {
+    getProducts("dashboard.php", null);
+  }
 });
 
-const getProducts = () => {
+const getProducts = (url, data) => {
   const envio = {
-    url: "http://192.168.100.6/Global/scripts/dashboard.php",
+    url: "http://192.168.100.6/Global/scripts/" + url,
     method: "POST",
     success: (userInfo) => {
-      console.log(userInfo);
-      console.log(userInfo.producto);
-
-      fillCards(userInfo.producto);
+      fillCards(userInfo.producto.reverse());
     },
     failed: () => alert("Usuario Incorrecto"),
-    data: null,
+    data,
   };
 
   fetchAsync(envio);
 };
 
 const fillCards = (userInfo) => {
+  const template = statusType || "";
   const $cardSection = $d.querySelector(".section-product"),
-    $cardTemplate = $d.getElementById("card-template").content,
     $fragment = $d.createDocumentFragment();
+  const $cardTemplate = $d.getElementById("card-template-" + template).content;
 
   userInfo.forEach((element) => {
+    const $card = $cardTemplate.querySelector("card");
     $cardTemplate.querySelector("card").setAttribute("id", element.PK_Producto);
     $cardTemplate.querySelector("img").setAttribute("src", element.imagen);
     $cardTemplate.querySelector("h3").textContent = element.nombre;
     $cardTemplate.querySelector(".description").innerHTML =
       `<p>` + element.descripcion + `</p>`;
     $cardTemplate.querySelector("h4").textContent = element.username;
+    $cardTemplate.querySelector("#categoria").textContent = element.categoria;
+    $cardTemplate.querySelector("#precio").textContent = element.precio;
+    $cardTemplate.querySelector("#stock").textContent = element.stock;
+    if (element.stock === "0") {
+      $card.style.backgroundColor = "#e00000";
+      $card
+        .querySelector(".product-buttons")
+        .removeChild($cardTemplate.querySelector("#delete"));
+    } else {
+      const deleteButton = $card.querySelector("#delete");
+      $card.style.backgroundColor = "#ffffff";
+      if (
+        deleteButton === null &&
+        localStorage.getItem("userType") === "Vendedor"
+      ) {
+        const $button = $d.createElement("button");
+        $button.classList.add("button");
+        $button.setAttribute("id", "delete");
+        $button.textContent = "Eliminar";
+        $card
+          .querySelector(".product-buttons")
+          .insertAdjacentElement("beforeend", $button);
+      }
+    }
 
     let $clone = $d.importNode($cardTemplate, true);
     $fragment.appendChild($clone);
@@ -54,69 +85,78 @@ const cardsInteraction = () => {
 
   $cards.forEach(($card) => {
     $card.addEventListener("click", (e) => {
-      const $carrito = $card.querySelector("#carrito");
-      const $deseos = $card.querySelector("#deseos");
-
-      if ($carrito === e.target) {
-        /*const Envio = {
-          url: "http://192.168.100.6/Global/scripts/dashboard.php",
-          method: "POST",
-          success: (userInfo) => {
-            console.log(userInfo);
-            console.log(userInfo.producto);
-
-            fillCards(userInfo.producto);
-          },
-          failed: () => alert("Usuario Incorrecto"),
-          data: null,
-        };*/
-        return;
-      }
-      if ($deseos === e.target) {
-        const Envio = {
-          url: "http://192.168.100.6/Global/scripts/addDeseos.php",
-          method: "POST",
-          success: (userInfo) => {
-            alert("Producto Agregado correctamente");
-          },
-          failed: () => alert("Usuario Incorrecto"),
-          data: JSON.stringify({
-            FK_Producto: $card.getAttribute("id"),
-            FK_Usuario: localStorage.getItem("PK_Usuario"),
-          }),
-        };
-
-        fetchAsync(Envio);
-        return;
+      if (statusType === "Vendedor") {
+        buttonCardControllerVendedor($card, e);
       }
 
-      console.log(e.target);
-      console.log($card.getAttribute("id"));
+      if (statusType === "Comprador") {
+        buttonsCardControllerComprador($card, e);
+      }
     });
   });
 };
 
-const navController = () => {
-  const $liDeseos = $d.querySelector("#deseos");
-  $liDeseos.addEventListener("click", (e) => {
-    location.href = `http://192.168.100.6/global/deseos.html`;
-  });
+function buttonCardControllerVendedor($card, e) {
+  const $editar = $card.querySelector("#edit");
+  const $eliminar = $card.querySelector("#delete");
 
-  const $nav = $d.querySelector(".header-nav"),
-    $li = $d.createElement("li");
-  $li.classList.add("nav-header");
+  if ($eliminar === e.target) {
+    const Envio = {
+      url: "http://192.168.100.6/Global/scripts/deleteProduct.php",
+      method: "POST",
+      success: (userInfo) => {
+        location.reload();
+      },
+      failed: () => alert("Usuario Incorrecto"),
+      data: JSON.stringify({
+        FK_Producto: $card.getAttribute("id"),
+      }),
+    };
 
-  $li.textContent = statusType === null ? "Iniciar Sesión" : "Cerrar Sesión";
+    fetchAsync(Envio);
+  }
 
-  $nav.insertAdjacentElement("beforeend", $li);
-};
+  if ($editar === e.target) {
+    location.href =
+      "http://192.168.100.6/global/edit-product.html?id=" +
+      $card.getAttribute("id");
+  }
+}
+
+function buttonsCardControllerComprador($card, e) {
+  const $carrito = $card.querySelector("#carrito");
+  const $deseos = $card.querySelector("#deseos");
+  let url = "",
+    color = "";
+
+  if ($carrito === e.target) {
+    url = "http://192.168.100.6/Global/scripts/addCarrito.php";
+    color = "#72cb10";
+  }
+  if ($deseos === e.target) {
+    url = "http://192.168.100.6/Global/scripts/addDeseos.php";
+    color = "#ffff72";
+  }
+
+  if ($carrito === e.target || $deseos === e.target) {
+    const Envio = {
+      url,
+      method: "POST",
+      success: (userInfo) => {
+        alert("Producto Agregado correctamente");
+        $card.style.backgroundColor = color;
+      },
+      failed: () => alert("Usuario Incorrecto"),
+      data: JSON.stringify({
+        FK_Producto: $card.getAttribute("id"),
+        FK_Usuario: localStorage.getItem("PK_Type"),
+      }),
+    };
+
+    fetchAsync(Envio);
+  }
+}
 
 $d.addEventListener("click", (e) => {
-  if (e.target.innerHTML === "Iniciar Sesión") {
-    location.href = "http://192.168.100.6/global";
-  }
-  if (e.target.innerHTML === "Cerrar Sesión") {
-    localStorage.clear();
-    location.reload();
-  }
+  clickListener(e);
 });

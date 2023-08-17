@@ -3,11 +3,13 @@
   flex-direction: row-reverse;
 }
 
-.section-img{
+img{
   width: 50%;
   height: 84.5vh;
   background-image: url("../img/login-background.jpg");
   background-size: cover;  
+  object-fit: cover;
+  object-position: center;
 
 }
 

@@ -52,12 +52,16 @@
 }
 
 .name {
+  display: flex;
+  justify-content: space-between;
 }
 
 .description{
 }
 
 .seller{
+  display: flex;
+  justify-content: space-between;
 }
 
 .product-buttons{
