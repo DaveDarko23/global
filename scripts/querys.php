@@ -432,7 +432,7 @@
 
       $json = array();
     
-      $consulta = "SELECT producto.*, username, pdf, status FROM carrito 
+      $consulta = "SELECT producto.*, username, pdf, status,PK_Carrito FROM carrito 
       INNER JOIN producto 
       INNER JOIN vendedor 
       INNER JOIN usuario 
@@ -446,6 +446,7 @@
     
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
+        $result["PK_Carrito"] = $registro['PK_Carrito'];
         $result["imagen"] = $registro['Imagen'];
         $result["nombre"] = $registro['Nombre'];
         $result["descripcion"] = $registro['Descripcion'];
@@ -612,6 +613,30 @@
     
         $sentencia = $conexion->prepare($query);
         $sentencia->bind_param('ii', $Cantidad, $PK_Producto);
+    
+        if($sentencia->execute()){
+          $retorno = 200;
+        }
+        
+        $sentencia->close();
+          $conexion->close();
+        return $retorno;
+      }catch(mysqli_sql_exception $e){
+        $conexion->close();
+        return -1;
+      }
+    }
+
+    public static function sendBuy($PK_Carrito){
+      try{
+        include 'conexion.php';
+
+        $retorno = 0;
+
+        $query = "UPDATE carrito SET status = 2  WHERE PK_Carrito = ?";
+    
+        $sentencia = $conexion->prepare($query);
+        $sentencia->bind_param('i', $PK_Carrito);
     
         if($sentencia->execute()){
           $retorno = 200;

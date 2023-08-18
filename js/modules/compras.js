@@ -77,6 +77,10 @@ const fillCards = (userInfo) => {
       $cardTemplate
         .querySelector(".product-buttons")
         .insertAdjacentElement("beforeend", $nodo);
+      $cardTemplate
+        .querySelector("card")
+        .setAttribute("data-user", element.PK_Carrito);
+
       const $button = $cardTemplate.querySelector("button");
       $button.textContent = "Enviar";
       $button.classList.add("button");
@@ -121,7 +125,9 @@ const cardsInteraction = () => {
             $card.style.backgroundColor = "#72cb10";
           },
           failed: () => alert("Usuario Incorrecto"),
-          data: null,
+          data: JSON.stringify({
+            PK_Carrito: $card.getAttribute("data-user"),
+          }),
         };
 
         fetchAsync(Envio);

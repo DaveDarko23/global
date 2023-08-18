@@ -25,7 +25,7 @@ const getProducts = (url, data) => {
     success: (userInfo) => {
       fillCards(userInfo.producto.reverse());
     },
-    failed: () => alert("Usuario Incorrecto"),
+    failed: () => {},
     data,
   };
 
