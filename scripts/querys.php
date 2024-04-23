@@ -5,7 +5,7 @@
     public static function loginComprador($usuario, $response){
       try{
           include 'conexion.php';
-          $sentencia = $conexion->prepare("SELECT PK_Usuario FROM usuario WHERE Username='$usuario->username' AND password='$usuario->password'");
+          $sentencia = $conexion->prepare("SELECT PK_Usuario FROM usuario WHERE username='$usuario->username' AND password='$usuario->password'");
           $sentencia->execute();
 
           $resultado = $sentencia->get_result();
@@ -13,10 +13,10 @@
           if($fila=$resultado->fetch_assoc()){
             $PK = $fila["PK_Usuario"];
 
-            $PK_Type = Database::getUserType($PK, "Vendedor", "PK_Administrador");
+            $PK_Type = Database::getUserType($PK, "vendedor", "PK_Administrador");
             if($PK_Type < 0){
-              $PK_Type = Database::getUserType($PK, "Comprador", "PK_Comprador");
-              $response->userType = "Comprador";
+              $PK_Type = Database::getUserType($PK, "comprador", "PK_Comprador");
+              $response->userType = "comprador";
             } 
             
           }
@@ -59,7 +59,7 @@
     public static function getPK($usuario){
       try{
           include 'conexion.php';
-          $sentencia = $conexion->prepare("SELECT PK_Usuario FROM usuario WHERE Username='$usuario->username' and password='$usuario->password'");
+          $sentencia = $conexion->prepare("SELECT PK_Usuario FROM usuario WHERE username='$usuario->username' and password='$usuario->password'");
           $sentencia->execute();
 
           $resultado = $sentencia->get_result();
@@ -106,7 +106,7 @@
         include 'conexion.php';
 
         $query = "INSERT INTO usuario (
-          correo, Username, password, nombre, apellido) 
+          correo, username, password, nombre, apellido) 
       VALUES 
           (?, ?, ?, ?, ?)";
 
@@ -120,7 +120,7 @@
       }
 
       $field = "PK_Comprador";
-      if (strcmp($usuario->userType, "Vendedor") === 0) {
+      if (strcmp($usuario->userType, "vendedor") === 0) {
         $field = "PK_Administrador";
       }
 
@@ -151,9 +151,9 @@
     
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
-        $result["imagen"] = $registro['Imagen'];
-        $result["nombre"] = $registro['Nombre'];
-        $result["descripcion"] = $registro['Descripcion'];
+        $result["imagen"] = $registro['imagen'];
+        $result["nombre"] = $registro['nombre'];
+        $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
         $result["PK_Categoria"] = $registro['PK_Categoria'];
@@ -195,9 +195,9 @@
 
         if($fila=$resultado->fetch_assoc()){
           $result["PK_Producto"] = $fila['PK_Producto'];
-          $result["imagen"] = $fila['Imagen'];
-          $result["nombre"] = $fila['Nombre'];
-          $result["descripcion"] = $fila['Descripcion'];
+          $result["imagen"] = $fila['imagen'];
+          $result["nombre"] = $fila['nombre'];
+          $result["descripcion"] = $fila['descripcion'];
           $result["precio"] = $fila['precio'];
           $result["stock"] = $fila['stock'];
           $result["PK_Categoria"] = $fila['PK_Categoria'];
@@ -223,7 +223,7 @@
 
         while($fila= mysqli_fetch_array($resultado)){
           $result["PK_Estado"] = $fila['PK_Estado'];
-          $result["Nombre"] = $fila['Nombre'];
+          $result["Nombre"] = $fila['nombre'];
           $json['Estado'][] = $result;
 
         }
@@ -240,7 +240,7 @@
         include 'conexion.php';
 
         $query = "INSERT INTO producto (
-          Imagen, Nombre, Descripcion, precio, stock, FK_Categoria, FK_Vendedor) 
+          imagen, nombre, descripcion, precio, stock, FK_Categoria, FK_Vendedor) 
         VALUES 
             (?,?,?,?,?,?,?)";
     
@@ -264,9 +264,9 @@
         include 'conexion.php';
 
         $query = "UPDATE producto SET
-                Imagen='$producto->imagen',
-                Nombre = '$producto->name',
-                Descripcion = '$producto->descripcion',
+                imagen='$producto->imagen',
+                nombre = '$producto->name',
+                descripcion = '$producto->descripcion',
                 precio = '$producto->precio',
                 stock = '$producto->stock',
                 FK_Categoria = '$producto->categoria'
@@ -395,9 +395,9 @@
     
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
-        $result["imagen"] = $registro['Imagen'];
-        $result["nombre"] = $registro['Nombre'];
-        $result["descripcion"] = $registro['Descripcion'];
+        $result["imagen"] = $registro['imagen'];
+        $result["nombre"] = $registro['nombre'];
+        $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
         $result["username"] = $registro['username'];
@@ -430,9 +430,9 @@
     
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
-        $result["imagen"] = $registro['Imagen'];
-        $result["nombre"] = $registro['Nombre'];
-        $result["descripcion"] = $registro['Descripcion'];
+        $result["imagen"] = $registro['imagen'];
+        $result["nombre"] = $registro['nombre'];
+        $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
         $result["status"] = $registro['status'];
@@ -469,9 +469,9 @@
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
         $result["PK_Carrito"] = $registro['PK_Carrito'];
-        $result["imagen"] = $registro['Imagen'];
-        $result["nombre"] = $registro['Nombre'];
-        $result["descripcion"] = $registro['Descripcion'];
+        $result["imagen"] = $registro['imagen'];
+        $result["nombre"] = $registro['nombre'];
+        $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
         $result["status"] = $registro['status'];
@@ -698,13 +698,13 @@
     public static function getState($PK_Usuario){
       try{
           include 'conexion.php';
-          $sentencia = $conexion->prepare("SELECT Nombre FROM entidad INNER JOIN comprador WHERE PK_Estado = FK_Estado AND PK_Comprador = $PK_Usuario");
+          $sentencia = $conexion->prepare("SELECT nombre FROM entidad INNER JOIN comprador WHERE PK_Estado = FK_Estado AND PK_Comprador = $PK_Usuario");
           $sentencia->execute();
 
           $resultado = $sentencia->get_result();
 
           if($fila=$resultado->fetch_assoc()){
-            $email = $fila["Nombre"];
+            $email = $fila["nombre"];
           }
 
           $sentencia->close();
