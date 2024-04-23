@@ -1,27 +1,42 @@
 .input-text{
   margin-bottom: 1rem;
-  
-  width: 80%;
+  width: 74%;
   height: 2rem;
   padding: 0 1rem;
   border-radius: .5rem;
   border-style: solid;
-  border-color: #0005;
+  border-style: none;
+  font-family: sans-serif;
+}
+
+.input-text:focus {
+  border-style: none;
+  outline: none;
+
 }
 
 .button{
   width: 80%;
-  height: 2rem;
   background-color: aliceblue;
   border-radius: .5rem;
   border-color: #0005;
   cursor: pointer;
   font-weight: bold;
+  height: 2.4rem;
+  border-style: none;
+}
+
+.button-enviar{
+  background-color: #258d29;
+  padding: .5rem;
+  border-style: none;
+  border-radius: .2rem;
+  cursor: pointer;
 }
 
 
 a{
-  color: black;
+  color: white;
   text-decoration: none;
 }
 
@@ -50,4 +65,12 @@ a{
   align-items: center;
   height: 1.5rem;
   width: 1.5rem;
+}
+
+#logIn:hover, #signUp:hover {
+  background-color: rgb(231, 239, 239);
+}
+
+#registerMargin {
+  margin-bottom: 0.65rem;
 }

@@ -37,7 +37,7 @@
        $tamano = $_FILES['archivo']['size'];
        $temp = $_FILES['archivo']['tmp_name'];
        //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
-       if (!((strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
+       if (!((strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png") || strpos($tipo, "webp")))) {
         echo  0;
         }
         else {
@@ -54,7 +54,7 @@
             //Mostramos el mensaje de que se ha subido co éxito
             //Mostramos la imagen subida
             // echo '<p><img src="images/'.$archivo.'"></p>';
-            $imagen = "http://192.168.100.6/images/".$FK_Vendedor.'/'.$archivo;
+            $imagen = "http://10.0.0.3/images/".$FK_Vendedor.'/'.$archivo;
             $producto = new Producto();
             $producto->createProduct($imagen, $name, $descripcion, $precio,$stock,$categoria, $FK_Vendedor);
             include 'querys.php';

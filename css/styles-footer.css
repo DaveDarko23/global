@@ -1,0 +1,32 @@
+.footer{
+  height: fit-content;
+  background-color: #4033b0;
+  padding: 2rem;
+  width: 100%;
+  background-color: #4033b0;
+  color: aliceblue;
+  display: flex;
+  
+  justify-content: center;
+}
+
+.footer-container{
+  width: 100%;
+  padding: .5rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-second{
+  display: flex;
+
+  width: 100%;
+  gap:10%
+}
+
+.map{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

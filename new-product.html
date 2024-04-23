@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/styles-header.css" />
     <link rel="stylesheet" href="css/styles-new-product.css" />
     <link rel="stylesheet" href="css/styles-input.css" />
+    <link rel="stylesheet" href="css/styles-footer.css" />
   </head>
   <body>
     <header class="header">
@@ -19,7 +20,7 @@
     <section class="section-add-product">
       <!-- <section class="section-img"></section> -->
       <img
-        src="http://192.168.100.2/global/img/login-background.jpg"
+        src="http://10.0.0.3/global/img/login-background.jpg"
         alt="Imagen Producto"
       />
       <section class="section-form">
@@ -57,13 +58,7 @@
             placeholder="stock"
             required
           />
-          <select class="input-text" name="categoria">
-            <option value="tecnologia">Tecnologia</option>
-            <option value="jardineria">Jardineria</option>
-            <option value="ropa">Ropa</option>
-            <option value="joyeria">Joyeria</option>
-            <option value="articulos-hogar">Articulos para el Hogar</option>
-          </select>
+          <select class="input-text" name="categoria"></select>
 
           <input type="hidden" name="fk_vendedor" id="fk_vendedor" />
 
@@ -80,12 +75,57 @@
           />
           <input type="hidden" name="id" />
         </form>
-        <!-- <form action="http://192.168.100.6/global/scripts/getProducts.php" method="POST" enctype="multipart/form-data"/>
+        <!-- <form action="http://10.0.0.3/global/scripts/getProducts.php" method="POST" enctype="multipart/form-data"/>
           <input name="archivo" id="archivo" type="file"/>
           <input type="submit" name="subir" value="Subir imagen"/>
         </form> -->
       </section>
     </section>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="info-footer">
+          <h2>Comercio Global</h2>
+          <h3>
+            Comercio electronico creado para acercar a las personas a los
+            productos con los que siempre han soñado. Continue aprendiendo sobre
+            nosotros en los siguientes enlaces
+          </h3>
+        </div>
+        <div class="footer-second">
+          <div class="nav-footer">
+            <ul>
+              <li>
+                <a href="http://10.0.0.3/global/mision.html"
+                  >¿Cual es nuestra Misión?</a
+                >
+              </li>
+              <li>
+                <a href="http://10.0.0.3/global/objetivo.html">Objetivo</a>
+              </li>
+              <li>
+                <a href="http://10.0.0.3/global/objetivo.html">Visiión</a>
+              </li>
+            </ul>
+          </div>
+          <div class="map">
+            <h3>
+              Si gustas visitarnos, nos podrás encontrar en la sigueinte
+              dirección
+            </h3>
+            <br />
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.19784827348!2d-103.39144422549762!3d20.70218899891655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428ae4e98d5453d%3A0xc4fdd3929a2ecbd1!2sCentro%20de%20Ense%C3%B1anza%20T%C3%A9cnica%20Industrial%20(Plantel%20Colomos)!5e0!3m2!1ses-419!2smx!4v1692380981711!5m2!1ses-419!2smx"
+              width="300"
+              height="225"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 
   <script src="js/modules/addProyect.js" type="module"></script>

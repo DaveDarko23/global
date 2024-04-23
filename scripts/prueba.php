@@ -2,15 +2,16 @@
 function sendMail($id,$reciever){
 	require("C:/xampp/vendor/phpmailer/phpmailer/src/PHPMailer.php");
   require("C:/xampp/vendor/phpmailer/phpmailer/src/SMTP.php");
+  // require("C:/xampp/vendor/phpmailer/phpmailer/src/Exception.php");
   
     $mail = new PHPMailer\PHPMailer\PHPMailer();
 	$mail->CharSet = 'utf-8';
 	$mail->Host = "smtp.googlemail.com";
-	$mail->From = "a22110098@ceti.mx";
+	$mail->From = "a22110098@ceti.mx"; // Correo Enviador
 	$mail->IsSMTP();
 	$mail->SMTPAuth = true;
-	$mail->Username = "a22110098@ceti.mx";
-	$mail->Password = "resident evil 12357";
+	$mail->Username = "a22110098@ceti.mx"; // Correo Enviador
+	$mail->Password = "resident evil 12357"; // Contraseña
 	$mail->SMTPSecure = "tls";
 	$mail->Port = 587;
 	$mail->AddAddress($reciever);

@@ -10,7 +10,7 @@
     $array2 = $array["array"];
 
     $random = rand(0, 99999999999);
-    $url = "http://192.168.100.6/global/pdf/mail-".$random.".pdf";
+    $url = "http://10.0.0.3/global/pdf/mail-".$random.".pdf";
 
     foreach ($array2 as $user){
       list($id, $name, $Cantidad, $precio) = $user;
@@ -25,7 +25,6 @@
     $estado = Database::getState($PK_Usuario);
     $domicilio = Database::getDomicilio($PK_Usuario);
 
-    generatePdf($random);
     generateContentPdf($array2,$precioTotal, $estado, $domicilio, $random);
 
     $email = Database::getEmail($PK_Usuario);

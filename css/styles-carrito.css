@@ -11,7 +11,7 @@
 }
 
 .button-buy{
-  width: 30%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,3 +25,22 @@
   justify-content: center;
   align-items: center;
 }
+
+.button{
+  background-color: #258d29;
+}
+
+.button-delete{
+  background-color: #C70020;
+  padding: .5rem;
+  border-style: none;
+  border-radius: .2rem;
+  cursor: pointer;
+}
+
+.product-buttons{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+}
+

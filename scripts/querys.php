@@ -146,7 +146,7 @@
 
       $json = array();
     
-      $consulta = "SELECT producto.*, username FROM producto INNER JOIN vendedor INNER JOIN usuario WHERE FK_Vendedor = PK_Administrador AND PK_Usuario = FK_Usuario".$condition;
+      $consulta = "SELECT producto.*, username, categoria.* FROM producto INNER JOIN vendedor INNER JOIN usuario INNER JOIN categoria WHERE FK_Vendedor = PK_Administrador AND PK_Categoria = FK_Categoria AND PK_Usuario = FK_Usuario".$condition;
       $resultado = mysqli_query($conexion, $consulta);
     
       while($registro = mysqli_fetch_array($resultado)){
@@ -156,6 +156,7 @@
         $result["descripcion"] = $registro['Descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
+        $result["PK_Categoria"] = $registro['PK_Categoria'];
         $result["categoria"] = $registro['categoria'];
         $result["username"] = $registro['username'];
         $result["FK_Vendedor"] = $registro['FK_Vendedor'];
@@ -166,10 +167,28 @@
       return $json;
     }
 
+    public static function getCategories(){
+      include 'conexion.php';
+
+      $json = array();
+    
+      $consulta = "SELECT * FROM categoria";
+      $resultado = mysqli_query($conexion, $consulta);
+    
+      while($registro = mysqli_fetch_array($resultado)){
+        $result["PK_Categoria"] = $registro['PK_Categoria'];
+        $result["nombre"] = $registro['categoria'];
+        $json['categoria'][] = $result;
+      }
+    
+      mysqli_close($conexion);
+      return $json;
+    }
+
     public static function getProduct($PK){
       try{
         include 'conexion.php';
-        $sentencia = $conexion->prepare("SELECT producto.*, username FROM producto INNER JOIN vendedor INNER JOIN usuario WHERE FK_Vendedor = PK_Administrador AND PK_Usuario = FK_Usuario AND PK_Producto = ". $PK);
+        $sentencia = $conexion->prepare("SELECT producto.*, username, categoria.* FROM producto INNER JOIN vendedor INNER JOIN usuario INNER JOIN categoria WHERE FK_Vendedor = PK_Administrador AND PK_Categoria = FK_Categoria AND PK_Usuario = FK_Usuario AND PK_Producto = ". $PK);
         $sentencia->execute();
 
         $resultado = $sentencia->get_result();
@@ -181,6 +200,7 @@
           $result["descripcion"] = $fila['Descripcion'];
           $result["precio"] = $fila['precio'];
           $result["stock"] = $fila['stock'];
+          $result["PK_Categoria"] = $fila['PK_Categoria'];
           $result["categoria"] = $fila['categoria'];
           $result["username"] = $fila['username'];
           $result["FK_Vendedor"] = $fila['FK_Vendedor'];
@@ -220,12 +240,12 @@
         include 'conexion.php';
 
         $query = "INSERT INTO producto (
-          Imagen, Nombre, Descripcion, precio, stock, categoria, FK_Vendedor) 
+          Imagen, Nombre, Descripcion, precio, stock, FK_Categoria, FK_Vendedor) 
         VALUES 
             (?,?,?,?,?,?,?)";
     
         $sentencia = $conexion->prepare($query);
-        $sentencia->bind_param('sssdisi', $producto->imagen,$producto->name,$producto->descripcion,$producto->precio,$producto->stock,$producto->categoria,$producto->FK_Vendedor);
+        $sentencia->bind_param('sssdiii', $producto->imagen,$producto->name,$producto->descripcion,$producto->precio,$producto->stock,$producto->categoria,$producto->FK_Vendedor);
     
         if($sentencia->execute()){
           $retorno = 200;
@@ -249,7 +269,7 @@
                 Descripcion = '$producto->descripcion',
                 precio = '$producto->precio',
                 stock = '$producto->stock',
-                categoria = '$producto->categoria'
+                FK_Categoria = '$producto->categoria'
                 WHERE PK_Producto = '$producto->PK_Producto'";
 
         $sentencia = $conexion->prepare($query);
@@ -380,7 +400,6 @@
         $result["descripcion"] = $registro['Descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
-        $result["categoria"] = $registro['categoria'];
         $result["username"] = $registro['username'];
         $result["FK_Vendedor"] = $registro['FK_Vendedor'];
         $json['producto'][] = $result;
@@ -395,13 +414,15 @@
 
       $json = array();
     
-      $consulta = "SELECT producto.*, username, cantidad, status, pdf FROM carrito 
+      $consulta = "SELECT producto.*, username, cantidad, status, pdf, categoria.* FROM carrito 
       INNER JOIN producto 
       INNER JOIN vendedor 
       INNER JOIN usuario 
+      INNER JOIN categoria
       WHERE carrito.FK_Producto = producto.PK_Producto 
       AND vendedor.PK_Administrador = producto.FK_Vendedor 
       AND usuario.PK_Usuario = vendedor.FK_Usuario 
+      AND PK_Categoria = FK_Categoria
       AND carrito.status ".$type." 0 
       AND carrito.FK_Usuario = ".$FK_Usuario;
       
@@ -415,6 +436,7 @@
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
         $result["status"] = $registro['status'];
+        $result["PK_Categoria"] = $registro['PK_Categoria'];
         $result["categoria"] = $registro['categoria'];
         $result["username"] = $registro['username'];
         $result["cantidad"] = $registro['cantidad'];
@@ -453,7 +475,6 @@
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
         $result["status"] = $registro['status'];
-        $result["categoria"] = $registro['categoria'];
         $result["username"] = $registro['username'];
         $result["pdf"] = $registro['pdf'];
         $result["FK_Vendedor"] = $registro['FK_Vendedor'];

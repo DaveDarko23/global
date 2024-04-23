@@ -30,7 +30,7 @@ const navController = (statusType, $doc) => {
 };
 
 export const clickListener = (e) => {
-  const url = "http://192.168.100.6/global/";
+  const url = "http://10.0.0.3/global/";
   switch (e.target.innerHTML) {
     case "Iniciar Sesión":
       location.href = url + "login.html";

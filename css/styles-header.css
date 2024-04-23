@@ -1,7 +1,8 @@
 .header{
+  padding: 2rem;
   width: 100%;
-  height: fit-content;
-  background-color: #0000ff;
+  height: 10vh;
+  background-color: #4033b0;
   color: aliceblue;
   display: flex;
   flex-direction: column;
@@ -10,30 +11,35 @@
 
 .first-header{
   width: 80%;
+  height: 6vh;
   margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem 0;
+}
+
+.first-header h1 {
 }
 
 .header-nav{
   width: 80%;
   margin: auto;
+  height: 4vh;
   display: flex;
   justify-content: flex-end;
+  font-family: sans-serif;
 }
 
 li{
-  color: #ffffff99;
+  color: white;
   cursor: pointer;
   list-style: none;
   height: inherit;
-  padding: .5rem;
+  padding: 1.2rem;
 }
 
 li:hover{
-  color: #fff;
+  color: rgb(217, 225, 232);
 }
 
 
@@ -45,12 +51,26 @@ li:hover{
   border-radius: .5rem 0 0 .5rem;
   padding: .5rem 2rem;
   width: 40%;
+  border-style: none;
+  font-family: sans-serif;
 }
 
 .button-search{
   width: 10%;
   text-align: center;
   padding: .5rem 2rem;
-  border-radius: 0 .5rem .5rem 0;
-  background-color: rgb(114, 227, 231);
+  border-radius: 0 .6rem .6rem 0;
+  margin: 0;
+  border-style: none;
+  background-color: rgb(112, 169, 239);
+  font-family: sans-serif;
+}
+
+.button-search:hover {
+  cursor: pointer;
+  background-color: rgb(133, 181, 240);
+}
+
+textarea:focus, input:focus{
+  outline: none;
 }

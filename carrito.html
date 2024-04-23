@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/styles-header.css" />
     <link rel="stylesheet" href="css/styles-dashboard.css" />
     <link rel="stylesheet" href="css/styles-input.css" />
+    <link rel="stylesheet" href="css/styles-footer.css" />
 
     <link rel="stylesheet" href="css/styles-carrito.css" />
   </head>
@@ -30,6 +31,51 @@
     </section>
     <div id="form"></div>
     <section class="section-product"></section>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="info-footer">
+          <h2>Comercio Global</h2>
+          <h3>
+            Comercio electronico creado para acercar a las personas a los
+            productos con los que siempre han soñado. Continue aprendiendo sobre
+            nosotros en los siguientes enlaces
+          </h3>
+        </div>
+        <div class="footer-second">
+          <div class="nav-footer">
+            <ul>
+              <li>
+                <a href="http://10.0.0.3/global/mision.html"
+                  >¿Cual es nuestra Misión?</a
+                >
+              </li>
+              <li>
+                <a href="http://10.0.0.3/global/objetivo.html">Objetivo</a>
+              </li>
+              <li>
+                <a href="http://10.0.0.3/global/objetivo.html">Visiión</a>
+              </li>
+            </ul>
+          </div>
+          <div class="map">
+            <h3>
+              Si gustas visitarnos, nos podrás encontrar en la sigueinte
+              dirección
+            </h3>
+            <br />
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.19784827348!2d-103.39144422549762!3d20.70218899891655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428ae4e98d5453d%3A0xc4fdd3929a2ecbd1!2sCentro%20de%20Ense%C3%B1anza%20T%C3%A9cnica%20Industrial%20(Plantel%20Colomos)!5e0!3m2!1ses-419!2smx!4v1692380981711!5m2!1ses-419!2smx"
+              width="300"
+              height="225"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 
   <template id="card-template">
@@ -41,29 +87,30 @@
         <div class="info">
           <div class="name">
             <h3></h3>
-            <h3>Precio <b id="precio"></b></h3>
-          </div>
-          <div class="description"></div>
-          <div class="seller">
-            <h4></h4>
-            <div>
-              <h4 id="categoria"></h4>
+            <div class="second-line">
+              <h3>$<b id="precio"></b></h3>
               <h6>
                 Disponibilidad:
                 <b id="stock"></b>
               </h6>
             </div>
           </div>
+          <div class="description"></div>
+          <div class="seller">
+            <h4></h4>
+            <div>
+              <h4 id="categoria"></h4>
+            </div>
+          </div>
         </div>
       </section>
       <section class="product-buttons">
-        <h5>Cantidad</h5>
         <div class="carrito-quantity">
           <button class="square-button" id="disminuir">-</button>
           <div class="square-value">1</div>
           <button class="square-button" id="aumentar">+</button>
         </div>
-        <button class="button" id="eliminar">Eliminar</button>
+        <button class="button-delete" id="eliminar">Eliminar</button>
       </section>
     </card>
   </template>

@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="css/styles-header.css" />
     <link rel="stylesheet" href="css/styles-dashboard.css" />
     <link rel="stylesheet" href="css/styles-input.css" />
+    <link rel="stylesheet" href="css/styles-footer.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400;700;900&family=Lato&family=Roboto:ital,wght@0,100;0,900;1,500&display=swap"
+      rel="stylesheet"
+    />
 
     <title>Document</title>
   </head>
@@ -15,18 +23,60 @@
       <div class="first-header">
         <h1>Comercio Global</h1>
         <div class="search-section">
-          <input type="search"class="search-bar"/>
+          <input
+            type="search"
+            class="search-bar"
+            placeholder="Busque un producto..."
+          />
           <input type="button" value="Buscar" class="button-search" />
         </div>
       </div>
       <nav>
-        <ul class="header-nav"> </ul>
+        <ul class="header-nav"></ul>
       </nav>
     </header>
     <section class="welcome">
       <h2>Busca lo que necesites dentro de nuestro extenso catalogo</h2>
     </section>
-    <section class="section-product"></section>
+    <section class="categories-section"></section>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="info-footer">
+          <h2>Comercio Global</h2>
+          <h3>
+            Comercio electronico creado para acercar a las personas a los
+            productos con los que siempre han soñado. Continue aprendiendo sobre
+            nosotros en los siguientes enlaces
+          </h3>
+        </div>
+        <div class="footer-second">
+          <div class="nav-footer">
+            <ul>
+              <li>¿Cual es nuestra Misión?</li>
+              <li>Objetivo</li>
+              <li>Visión</li>
+            </ul>
+          </div>
+          <div class="map">
+            <h3>
+              Si gustas visitarnos, nos podrás encontrar en la sigueinte
+              dirección
+            </h3>
+            <br />
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.19784827348!2d-103.39144422549762!3d20.70218899891655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428ae4e98d5453d%3A0xc4fdd3929a2ecbd1!2sCentro%20de%20Ense%C3%B1anza%20T%C3%A9cnica%20Industrial%20(Plantel%20Colomos)!5e0!3m2!1ses-419!2smx!4v1692380981711!5m2!1ses-419!2smx"
+              width="300"
+              height="225"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 
   <template id="template-card">
@@ -45,24 +95,26 @@
         <div class="info">
           <div class="name">
             <h3></h3>
-            <h3>Precio: $<b id="precio"></b></h3>
+            <div class="second-line">
+              <h3>$<b id="precio"></b></h3>
+              <h6>
+                Disponibilidad:
+                <b id="stock"></b>
+              </h6>
+            </div>
           </div>
           <div class="description"></div>
           <div class="seller">
             <h4></h4>
             <div>
               <h4 id="categoria"></h4>
-              <h6>
-                Disponibilidad:
-                <b id="stock"></b>
-              </h6>
             </div>
+          </div>
         </div>
       </section>
       <section class="product-buttons">
-        <h5>Agregar a:</h5>
-        <button class="button" id="carrito">Carrito!</button>
         <button class="button" id="deseos">Deseos!</button>
+        <button class="button" id="carrito">Carrito!</button>
       </section>
     </card>
   </template>
@@ -103,23 +155,24 @@
         <div class="info">
           <div class="name">
             <h3></h3>
-            <h3>Precio $<b id="precio"></b></h3>
-          </div>
-          <div class="description"></div>
-          <div class="seller">
-            <h4></h4>
-            <div>
-              <h4 id="categoria"></h4>
+            <div class="second-line">
+              <h3>$<b id="precio"></b></h3>
               <h6>
                 Disponibilidad:
                 <b id="stock"></b>
               </h6>
             </div>
           </div>
+          <div class="description"></div>
+          <div class="seller">
+            <h4></h4>
+            <div>
+              <h4 id="categoria"></h4>
+            </div>
+          </div>
         </div>
       </section>
       <section class="product-buttons">
-        <h5>Acciones:</h5>
         <button class="button" id="edit">Editar</button>
         <button class="button" id="delete">Eliminar</button>
       </section>

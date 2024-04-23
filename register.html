@@ -9,65 +9,68 @@
     <link rel="stylesheet" href="css/styles-input.css" />
   </head>
   <body>
-    <section class="section-login">
-      <h1>Comercio Global</h1>
-      <div>
-        <h2>Crear una cuenta</h2>
-        <p>
-          Registrate y comienza a explorar todos los productos que te están
-          esperando
-        </p>
-      </div>
-      <form class="login-form">
-        <input
+    <div class="container">
+      <section class="section-login" id="registerSize">
+        <h1 id="Title">Comercio Global</h1>
+        <div>
+          <h3 id="createText">Crear una cuenta</h3>
+        </div>
+        <form class="login-form">
+          <input
+          id="registerMargin"
+            class="input-text"
+            type="text"
+            name="email"
+            placeholder="Correo Electronico"
+            required
+          />
+          <input
+          id="registerMargin"
           class="input-text"
-          type="text"
-          name="email"
-          placeholder="Correo Electronico"
-          required
-        />
-        <input
+            type="text"
+            name="username"
+            placeholder="Nombre de Usuario"
+            required
+          />
+          <input
+          id="registerMargin"
           class="input-text"
-          type="text"
-          name="username"
-          placeholder="Nombre"
-          required
-        />
-        <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            required
+          />
+          <input
+          id="registerMargin"
           class="input-text"
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          required
-        />
-        <input
+            type="text"
+            name="name"
+            placeholder="Nombre"
+            required
+          />
+          <input
+          id="registerMargin"
           class="input-text"
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          required
-        />
-        <input
-          class="input-text"
-          type="text"
-          name="last-name"
-          placeholder="Apellido"
-          required
-        />
-        <select name="type" class="input-text">
-          <option value="Comprador" selected>Comprador</option>
-          <option value="Vendedor">Vendedor</option>
-        </select>
-        <input class="button" type="submit" value="Registrarme" />
-        <input type="hidden" name="id" />
-      </form>
-      <div>
-        <h3>¿Ya tienes una cuenta?</h3>
-        <button class="button" id="logIn">
-          <b>Iniciar Sesión</b>
-        </button>
-      </div>
-    </section>
+            type="text"
+            name="last-name"
+            placeholder="Apellido"
+            required
+          />
+          <select name="type" class="input-text">
+            <option value="Comprador" selected>Comprador</option>
+            <option value="Vendedor">Vendedor</option>
+          </select>
+          <input class="button" type="submit" value="Registrarme" id="signUp"/>
+          <input type="hidden" name="id" />
+        </form>
+        <div>
+          <h5 id="noaccount">¿Ya tienes una cuenta?</h5>
+          <button class="button" id="logIn">
+            <b>Iniciar Sesión</b>
+          </button>
+        </div>
+      </section>
+    </div>
   </body>
 </html>
 

@@ -8,80 +8,139 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
   navController(statusType, $d);
 
+  const busqueda = getParameterByName("search");
+  let data;
   if (statusType === "Vendedor") {
+    data = busqueda === "" ? null : busqueda;
     getProducts(
       "sellerDashboard.php",
-      JSON.stringify({ PK_Vendedor: localStorage.getItem("PK_Type") })
+      JSON.stringify({
+        PK_Vendedor: localStorage.getItem("PK_Type"),
+        busqueda: data,
+      })
     );
   } else {
-    getProducts("dashboard.php", null);
+    data = busqueda === "" ? null : JSON.stringify({ busqueda });
+    getProducts("dashboard.php", data);
   }
+
+  const $btnBuscar = $d.querySelector(".button-search");
+  const $search = $d.querySelector(".search-bar");
+  $btnBuscar.addEventListener("click", (e) => {
+    console.log($search.value);
+    if ($search.value !== "") {
+      //alert("Buscar");
+      location.href =
+        "http://10.0.0.3/global/index.html?search=" + $search.value;
+    } else {
+      alert("Escribe un producto para buscar");
+    }
+  });
 });
+
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+  return results === null
+    ? ""
+    : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 const getProducts = (url, data) => {
   const envio = {
-    url: "http://192.168.100.6/Global/scripts/" + url,
+    url: "http://10.0.0.3/Global/scripts/" + url,
     method: "POST",
     success: (userInfo) => {
-      fillCards(userInfo.producto.reverse());
+      const set = new Set();
+
+      userInfo.producto.forEach((e) => set.add(e.categoria));
+      console.log(set);
+      set.forEach((e) => {
+        const $categorieName = $d.createElement("h2");
+        $categorieName.textContent = e;
+        const $sectionProduct = $d.createElement("section");
+        $sectionProduct.classList.add("section-product");
+        $sectionProduct.setAttribute("id", e);
+        $d.querySelector(".categories-section").insertAdjacentElement(
+          "beforeend",
+          $categorieName
+        );
+        $d.querySelector(".categories-section").insertAdjacentElement(
+          "beforeend",
+          $sectionProduct
+        );
+        console.log(userInfo.producto.reverse());
+        fillCards(userInfo.producto.reverse(), e);
+      });
+      cardsInteraction();
     },
     failed: () => {},
     data,
   };
 
+  console.log(envio);
+
   fetchAsync(envio);
 };
 
-const fillCards = (userInfo) => {
+const fillCards = (userInfo, categorieSection) => {
   const template = statusType || "";
-  const $cardSection = $d.querySelector(".section-product"),
+  const $cardSection = $d.querySelector(".section-product#" + categorieSection),
     $fragment = $d.createDocumentFragment();
   const $cardTemplate = $d.getElementById("card-template-" + template).content;
 
   userInfo.forEach((element) => {
-    const $card = $cardTemplate.querySelector("card");
-    $cardTemplate.querySelector("card").setAttribute("id", element.PK_Producto);
-    $cardTemplate.querySelector("img").setAttribute("src", element.imagen);
-    $cardTemplate.querySelector("h3").textContent = element.nombre;
-    $cardTemplate.querySelector(".description").innerHTML =
-      `<p>` + element.descripcion + `</p>`;
-    $cardTemplate.querySelector("h4").textContent = element.username;
-    $cardTemplate.querySelector("#categoria").textContent = element.categoria;
-    $cardTemplate.querySelector("#precio").textContent = element.precio;
-    $cardTemplate.querySelector("#stock").textContent = element.stock;
-    if (element.stock === "0") {
-      $card.style.backgroundColor = "#e00000";
-      $card
-        .querySelector(".product-buttons")
-        .removeChild($cardTemplate.querySelector("#delete"));
-    } else {
-      const deleteButton = $card.querySelector("#delete");
-      $card.style.backgroundColor = "#ffffff";
-      if (
-        deleteButton === null &&
-        localStorage.getItem("userType") === "Vendedor"
-      ) {
-        const $button = $d.createElement("button");
-        $button.classList.add("button");
-        $button.setAttribute("id", "delete");
-        $button.textContent = "Eliminar";
-        $card
+    console.log(element);
+    if (categorieSection === element.categoria) {
+      const $card = $cardTemplate.querySelector("card");
+      $cardTemplate
+        .querySelector("card")
+        .setAttribute("id", element.PK_Producto);
+      $cardTemplate.querySelector("img").setAttribute("src", element.imagen);
+      $cardTemplate.querySelector("h3").textContent = element.nombre;
+      // $cardTemplate.querySelector(".description").innerHTML =
+      //   `<p>` + element.descripcion + `</p>`;
+      $cardTemplate.querySelector("h4").textContent = element.username;
+      // $cardTemplate.querySelector("#categoria").textContent = element.categoria;
+      $cardTemplate.querySelector("#precio").textContent = element.precio;
+      $cardTemplate.querySelector("#stock").textContent = element.stock;
+      if (element.stock === "0") {
+        $card.style.backgroundColor = "#e00000";
+        /*$card
           .querySelector(".product-buttons")
-          .insertAdjacentElement("beforeend", $button);
+          .removeChild($cardTemplate.querySelector("#delete"));*/
+      } else {
+        const deleteButton = $card.querySelector("#delete");
+        $card.style.backgroundColor = "#ffffff";
+        if (
+          deleteButton === null &&
+          localStorage.getItem("userType") === "Vendedor"
+        ) {
+          const $button = $d.createElement("button");
+          $button.classList.add("button");
+          $button.setAttribute("id", "delete");
+          $button.textContent = "Eliminar";
+          $card
+            .querySelector(".product-buttons")
+            .insertAdjacentElement("beforeend", $button);
+        }
       }
-    }
 
-    let $clone = $d.importNode($cardTemplate, true);
-    $fragment.appendChild($clone);
+      let $clone = $d.importNode($cardTemplate, true);
+      $fragment.appendChild($clone);
+      console.log($cardTemplate);
+      console.log($clone);
+      console.log($fragment);
+    }
   });
 
   $cardSection.appendChild($fragment);
-
-  cardsInteraction();
 };
 
 const cardsInteraction = () => {
   const $cards = $d.querySelectorAll(".card");
+  console.log($cards);
 
   $cards.forEach(($card) => {
     $card.addEventListener("click", (e) => {
@@ -102,7 +161,7 @@ function buttonCardControllerVendedor($card, e) {
 
   if ($eliminar === e.target) {
     const Envio = {
-      url: "http://192.168.100.6/Global/scripts/deleteProduct.php",
+      url: "http://10.0.0.3/Global/scripts/deleteProduct.php",
       method: "POST",
       success: (userInfo) => {
         location.reload();
@@ -118,8 +177,7 @@ function buttonCardControllerVendedor($card, e) {
 
   if ($editar === e.target) {
     location.href =
-      "http://192.168.100.6/global/edit-product.html?id=" +
-      $card.getAttribute("id");
+      "http://10.0.0.3/global/edit-product.html?id=" + $card.getAttribute("id");
   }
 }
 
@@ -130,11 +188,11 @@ function buttonsCardControllerComprador($card, e) {
     color = "";
 
   if ($carrito === e.target) {
-    url = "http://192.168.100.6/Global/scripts/addCarrito.php";
+    url = "http://10.0.0.3/Global/scripts/addCarrito.php";
     color = "#72cb10";
   }
   if ($deseos === e.target) {
-    url = "http://192.168.100.6/Global/scripts/addDeseos.php";
+    url = "http://10.0.0.3/Global/scripts/addDeseos.php";
     color = "#ffff72";
   }
 

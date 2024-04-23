@@ -8,7 +8,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType !== "Comprador") {
-    location.href = "http://192.168.100.6/Global";
+    location.href = "http://10.0.0.3/Global";
   }
 
   navController(statusType, $d);
@@ -18,7 +18,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 const getProducts = () => {
   const envio = {
-    url: "http://192.168.100.6/Global/scripts/deseos.php",
+    url: "http://10.0.0.3/Global/scripts/deseos.php",
     method: "POST",
     success: (userInfo) => {
       console.log(userInfo);
@@ -30,7 +30,7 @@ const getProducts = () => {
     },
     failed: () => alert("Ocurrió un error"),
     data: JSON.stringify({
-      FK_Usuario: localStorage.getItem("PK_Usuario"),
+      FK_Usuario: localStorage.getItem("PK_Type"),
     }),
   };
 
@@ -71,11 +71,11 @@ const cardsInteraction = () => {
         color = "";
 
       if ($carrito === e.target) {
-        url = "http://192.168.100.6/Global/scripts/addCarrito.php";
+        url = "http://10.0.0.3/Global/scripts/addCarrito.php";
         color = "#72cb10";
       }
       if ($delete === e.target) {
-        url = "http://192.168.100.6/Global/scripts/deleteDeseos.php";
+        url = "http://10.0.0.3/Global/scripts/deleteDeseos.php";
         color = "#ffff72";
       }
 

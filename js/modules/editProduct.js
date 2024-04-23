@@ -9,13 +9,36 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType !== "Vendedor") {
-    location.href = "http://192.168.100.6/global";
+    location.href = "http://10.0.0.3/global";
   }
 
   navController(statusType, $d);
 
+  const envioOption = {
+    url: "http://10.0.0.3/Global/scripts/getCategories.php",
+    method: "POST",
+    success: (answer) => {
+      const $selector = $d.querySelector("[name='categoria']");
+      answer.categoria.forEach((element) => {
+        const $option = $d.createElement("option");
+        $option.setAttribute("value", element.PK_Categoria);
+        $option.setAttribute("data-categoria", element.PK_Categoria);
+        $option.textContent = element.nombre;
+        $selector.insertAdjacentElement("beforeend", $option);
+      });
+
+      getProducts();
+    },
+    failed: () => alert("Ocurrió un Accidente"),
+    data: null,
+  };
+
+  fetchAsync(envioOption);
+});
+
+function getProducts() {
   const envio = {
-    url: "http://192.168.100.6/global/scripts/getProduct.php",
+    url: "http://10.0.0.3/global/scripts/getProduct.php",
     method: "POST",
     success: (answer) => {
       const $nombre = $d.querySelector("[name=name]"),
@@ -32,7 +55,14 @@ $d.addEventListener("DOMContentLoaded", (e) => {
       $descripcion.setAttribute("value", answer.descripcion);
       $precio.setAttribute("value", answer.precio);
       $stock.setAttribute("value", answer.stock);
-      $categoria.setAttribute("value", answer.categoria);
+      const $options = $categoria.querySelectorAll("[data-categoria]");
+      console.log($options);
+      $options.forEach((e) => {
+        if (e.textContent === answer.categoria) {
+          console.log(answer.categoria);
+          e.setAttribute("selected", "selected");
+        }
+      });
       console.log($file);
 
       $file.addEventListener("change", (e) => {
@@ -44,7 +74,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   };
 
   fetchAsync(envio);
-});
+}
 
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -70,12 +100,12 @@ $d.addEventListener("submit", (e) => {
   }
 
   const envio = {
-    url: "http://192.168.100.6/global/scripts/editProduct.php",
+    url: "http://10.0.0.3/global/scripts/editProduct.php",
     method: "POST",
     success: (answer) => {
       console.log(answer);
       if (answer === 200) {
-        location.href = "http://192.168.100.6/global";
+        location.href = "http://10.0.0.3/global";
       }
     },
     failed: () => alert("Ocurrió un Accidente"),

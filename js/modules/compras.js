@@ -8,7 +8,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType === null) {
-    location.href = "http://192.168.100.6/global";
+    location.href = "http://10.0.0.3/global";
   }
 
   navController(statusType, $d);
@@ -18,7 +18,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 const getProducts = () => {
   const envio = {
-    url: "http://192.168.100.6/Global/scripts/compras.php",
+    url: "http://10.0.0.3/Global/scripts/compras.php",
     method: "POST",
     success: (userInfo) => {
       if (userInfo.length === 0) {
@@ -83,7 +83,7 @@ const fillCards = (userInfo) => {
 
       const $button = $cardTemplate.querySelector("button");
       $button.textContent = "Enviar";
-      $button.classList.add("button");
+      $button.classList.add("button-enviar");
 
       const $a = $d.createElement("a");
       $cardTemplate
@@ -95,9 +95,9 @@ const fillCards = (userInfo) => {
     $pdf.setAttribute("href", element.pdf);
     $cardTemplate.querySelector("img").setAttribute("src", element.imagen);
     $cardTemplate.querySelector("h3").textContent = element.nombre;
-    $cardTemplate.querySelector(".description").innerHTML =
-      `<p>` + element.descripcion + `</p>`;
-    $cardTemplate.querySelector("h4").textContent = element.username;
+    // $cardTemplate.querySelector(".description").innerHTML =
+    //   `<p>` + element.descripcion + `</p>`;
+    // $cardTemplate.querySelector("h4").textContent = element.username;
 
     let $clone = $d.importNode($cardTemplate, true);
     $fragment.appendChild($clone);
@@ -113,12 +113,12 @@ const cardsInteraction = () => {
 
   $cards.forEach(($card) => {
     $card.addEventListener("click", (e) => {
-      const $enviar = $card.querySelector(".button");
+      const $enviar = $card.querySelector(".button-enviar");
       const $deseos = $card.querySelector("#deseos");
 
       if ($enviar === e.target) {
         const Envio = {
-          url: "http://192.168.100.6/Global/scripts/sendProduct.php",
+          url: "http://10.0.0.3/Global/scripts/sendProduct.php",
           method: "POST",
           success: (userInfo) => {
             alert("Producto Enviado");

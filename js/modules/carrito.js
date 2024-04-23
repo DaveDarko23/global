@@ -8,7 +8,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType === null) {
-    location.href = "http://192.168.100.6/Global";
+    location.href = "http://10.0.0.3/Global";
   }
 
   navController(statusType, $d);
@@ -32,7 +32,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   </form>`;
 
     const envio = {
-      url: "http://192.168.100.6/Global/scripts/getStates.php",
+      url: "http://10.0.0.3/Global/scripts/getStates.php",
       method: "POST",
       success: (userInfo) => {
         const $select = $sectionForm.querySelector("select");
@@ -52,7 +52,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
       $id.setAttribute("value", localStorage.getItem("PK_Type"));
       console.log($id);
       const envio = {
-        url: "http://192.168.100.6/Global/scripts/setDomicilio.php",
+        url: "http://10.0.0.3/Global/scripts/setDomicilio.php",
         method: "POST",
         success: (userInfo) => {
           enviarCompra();
@@ -79,7 +79,7 @@ function enviarCompra() {
   });
 
   const envio = {
-    url: "http://192.168.100.6/Global/scripts/compra.php",
+    url: "http://10.0.0.3/Global/scripts/compra.php",
     method: "POST",
     success: (userInfo) => {
       location.reload();
@@ -97,7 +97,7 @@ function enviarCompra() {
 
 const getProducts = () => {
   const envio = {
-    url: "http://192.168.100.6/Global/scripts/carrito.php",
+    url: "http://10.0.0.3/Global/scripts/carrito.php",
     method: "POST",
     success: (userInfo) => {
       $d.querySelector("#numero-elementos").textContent =
@@ -135,10 +135,10 @@ const fillCards = (userInfo) => {
     $cardTemplate.querySelector("card").setAttribute("id", element.PK_Producto);
     $cardTemplate.querySelector("img").setAttribute("src", element.imagen);
     $cardTemplate.querySelector("h3").textContent = element.nombre;
-    $cardTemplate.querySelector(".description").innerHTML =
-      `<p>` + element.descripcion + `</p>`;
+    // $cardTemplate.querySelector(".description").innerHTML =
+    //   `<p>` + element.descripcion + `</p>`;
     $cardTemplate.querySelector("h4").textContent = element.username;
-    $cardTemplate.querySelector("#categoria").textContent = element.categoria;
+    // $cardTemplate.querySelector("#categoria").textContent = element.categoria;
     $cardTemplate.querySelector("#precio").textContent =
       element.precio * element.cantidad;
     $cardTemplate.querySelector("#stock").textContent = element.stock;
@@ -204,7 +204,7 @@ const cardsInteraction = () => {
       }
 
       const envio = {
-        url: "http://192.168.100.6/Global/scripts/carrito.php",
+        url: "http://10.0.0.3/Global/scripts/carrito.php",
         method: "POST",
         success: (userInfo) => {
           const precioTotalAntiguo =

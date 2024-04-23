@@ -5,7 +5,25 @@ let statusType = "";
 
 $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
-  if (statusType !== "Vendedor") location.href = "http://192.168.100.6/global";
+  if (statusType !== "Vendedor") location.href = "http://10.0.0.3/global";
+
+  const envio = {
+    url: "http://10.0.0.3/Global/scripts/getCategories.php",
+    method: "POST",
+    success: (answer) => {
+      const $selector = $d.querySelector("[name='categoria']");
+      answer.categoria.forEach((element) => {
+        const $option = $d.createElement("option");
+        $option.setAttribute("value", element.PK_Categoria);
+        $option.textContent = element.nombre;
+        $selector.insertAdjacentElement("beforeend", $option);
+      });
+    },
+    failed: () => alert("Ocurrió un Accidente"),
+    data: null,
+  };
+
+  fetchAsync(envio);
 
   navController();
 });
@@ -16,11 +34,11 @@ $d.addEventListener("submit", (e) => {
   $fk.setAttribute("value", localStorage.getItem("PK_Type"));
   console.log($fk);
   const envio = {
-    url: "http://192.168.100.6/Global/scripts/addProduct.php",
+    url: "http://10.0.0.3/Global/scripts/addProduct.php",
     method: "POST",
     success: (answer) => {
       if (answer === 200) {
-        location.href = "http://192.168.100.6/global";
+        location.href = "http://10.0.0.3/global";
       }
     },
     failed: () => alert("Ocurrió un Accidente"),
@@ -58,7 +76,7 @@ const navController = () => {
 };
 
 $d.addEventListener("click", (e) => {
-  const url = "http://192.168.100.6/global/";
+  const url = "http://10.0.0.3/global/";
   switch (e.target.innerHTML) {
     case "Iniciar Sesión":
       location.href = url + "login.html";
