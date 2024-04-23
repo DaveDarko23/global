@@ -491,7 +491,7 @@
 
         $retorno = 0;
 
-        $query = "UPDATE carrito SET cantidad = cantidad + 1 WHERE FK_Producto = ? AND FK_Usuario=? AND Status=0";
+        $query = "UPDATE carrito SET cantidad = cantidad + 1 WHERE FK_Producto = ? AND FK_Usuario=? AND status=0";
     
         $sentencia = $conexion->prepare($query);
         $sentencia->bind_param('ii', $FK_Producto, $FK_Usuario);
@@ -514,7 +514,7 @@
 
         $retorno = 0;
 
-        $query = "UPDATE carrito SET cantidad = cantidad - 1 WHERE FK_Producto = ? AND FK_Usuario=? AND Status=0";
+        $query = "UPDATE carrito SET cantidad = cantidad - 1 WHERE FK_Producto = ? AND FK_Usuario=? AND status=0";
     
         $sentencia = $conexion->prepare($query);
         $sentencia->bind_param('ii', $FK_Producto, $FK_Usuario);
@@ -537,7 +537,7 @@
 
         $retorno = 0;
 
-        $query = "DELETE FROM carrito WHERE FK_Producto = ? AND FK_Usuario=? AND Status=0";
+        $query = "DELETE FROM carrito WHERE FK_Producto = ? AND FK_Usuario=? AND status=0";
     
         $sentencia = $conexion->prepare($query);
         $sentencia->bind_param('ii', $FK_Producto, $FK_Usuario);
@@ -560,7 +560,7 @@
 
         $retorno = 0;
 
-        $query = "UPDATE carrito SET pdf = ? WHERE FK_Usuario=? AND Status=0";
+        $query = "UPDATE carrito SET pdf = ? WHERE FK_Usuario=? AND status=0";
     
         $sentencia = $conexion->prepare($query);
         $sentencia->bind_param('si', $url, $FK_Usuario);
