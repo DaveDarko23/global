@@ -8,7 +8,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   if (statusType !== "Vendedor") location.href = "http://10.0.0.3/global";
 
   const envio = {
-    url: "http://10.0.0.3/Global/scripts/getCategories.php",
+    url: "http://10.0.0.3/global/scripts/getCategories.php",
     method: "POST",
     success: (answer) => {
       const $selector = $d.querySelector("[name='categoria']");
@@ -34,7 +34,7 @@ $d.addEventListener("submit", (e) => {
   $fk.setAttribute("value", localStorage.getItem("PK_Type"));
   console.log($fk);
   const envio = {
-    url: "http://10.0.0.3/Global/scripts/addProduct.php",
+    url: "http://10.0.0.3/global/scripts/addProduct.php",
     method: "POST",
     success: (answer) => {
       if (answer === 200) {

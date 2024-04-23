@@ -18,7 +18,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 const getProducts = () => {
   const envio = {
-    url: "http://10.0.0.3/Global/scripts/compras.php",
+    url: "http://10.0.0.3/global/scripts/compras.php",
     method: "POST",
     success: (userInfo) => {
       if (userInfo.length === 0) {
@@ -118,7 +118,7 @@ const cardsInteraction = () => {
 
       if ($enviar === e.target) {
         const Envio = {
-          url: "http://10.0.0.3/Global/scripts/sendProduct.php",
+          url: "http://10.0.0.3/global/scripts/sendProduct.php",
           method: "POST",
           success: (userInfo) => {
             alert("Producto Enviado");

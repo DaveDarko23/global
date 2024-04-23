@@ -8,7 +8,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType === null) {
-    location.href = "http://10.0.0.3/Global";
+    location.href = "http://10.0.0.3/global";
   }
 
   navController(statusType, $d);
@@ -32,7 +32,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   </form>`;
 
     const envio = {
-      url: "http://10.0.0.3/Global/scripts/getStates.php",
+      url: "http://10.0.0.3/global/scripts/getStates.php",
       method: "POST",
       success: (userInfo) => {
         const $select = $sectionForm.querySelector("select");
@@ -52,7 +52,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
       $id.setAttribute("value", localStorage.getItem("PK_Type"));
       console.log($id);
       const envio = {
-        url: "http://10.0.0.3/Global/scripts/setDomicilio.php",
+        url: "http://10.0.0.3/global/scripts/setDomicilio.php",
         method: "POST",
         success: (userInfo) => {
           enviarCompra();
@@ -79,7 +79,7 @@ function enviarCompra() {
   });
 
   const envio = {
-    url: "http://10.0.0.3/Global/scripts/compra.php",
+    url: "http://10.0.0.3/global/scripts/compra.php",
     method: "POST",
     success: (userInfo) => {
       location.reload();
@@ -97,7 +97,7 @@ function enviarCompra() {
 
 const getProducts = () => {
   const envio = {
-    url: "http://10.0.0.3/Global/scripts/carrito.php",
+    url: "http://10.0.0.3/global/scripts/carrito.php",
     method: "POST",
     success: (userInfo) => {
       $d.querySelector("#numero-elementos").textContent =
@@ -204,7 +204,7 @@ const cardsInteraction = () => {
       }
 
       const envio = {
-        url: "http://10.0.0.3/Global/scripts/carrito.php",
+        url: "http://10.0.0.3/global/scripts/carrito.php",
         method: "POST",
         success: (userInfo) => {
           const precioTotalAntiguo =

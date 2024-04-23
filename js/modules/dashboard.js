@@ -49,7 +49,7 @@ function getParameterByName(name) {
 
 const getProducts = (url, data) => {
   const envio = {
-    url: "http://10.0.0.3/Global/scripts/" + url,
+    url: "http://10.0.0.3/global/scripts/" + url,
     method: "POST",
     success: (userInfo) => {
       const set = new Set();
@@ -161,7 +161,7 @@ function buttonCardControllerVendedor($card, e) {
 
   if ($eliminar === e.target) {
     const Envio = {
-      url: "http://10.0.0.3/Global/scripts/deleteProduct.php",
+      url: "http://10.0.0.3/global/scripts/deleteProduct.php",
       method: "POST",
       success: (userInfo) => {
         location.reload();
@@ -188,11 +188,11 @@ function buttonsCardControllerComprador($card, e) {
     color = "";
 
   if ($carrito === e.target) {
-    url = "http://10.0.0.3/Global/scripts/addCarrito.php";
+    url = "http://10.0.0.3/global/scripts/addCarrito.php";
     color = "#72cb10";
   }
   if ($deseos === e.target) {
-    url = "http://10.0.0.3/Global/scripts/addDeseos.php";
+    url = "http://10.0.0.3/global/scripts/addDeseos.php";
     color = "#ffff72";
   }
 

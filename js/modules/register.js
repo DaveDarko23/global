@@ -11,7 +11,7 @@ $d.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log("Click");
   const envio = {
-    url: "http://10.0.0.3/Global/scripts/register.php",
+    url: "http://10.0.0.3/global/scripts/register.php",
     method: "POST",
     success: (userInfo) => {
       if (userInfo.PK_Usuario > 0) {
@@ -32,6 +32,6 @@ $d.addEventListener("click", (e) => {
   console.log(e.target);
 
   if (e.target === $button) {
-    location.href = "http://10.0.0.3/Global/login.html";
+    location.href = "http://10.0.0.3/global/login.html";
   }
 });

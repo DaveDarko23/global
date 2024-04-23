@@ -15,7 +15,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   navController(statusType, $d);
 
   const envioOption = {
-    url: "http://10.0.0.3/Global/scripts/getCategories.php",
+    url: "http://10.0.0.3/global/scripts/getCategories.php",
     method: "POST",
     success: (answer) => {
       const $selector = $d.querySelector("[name='categoria']");
