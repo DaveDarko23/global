@@ -1,5 +1,6 @@
 import access from "./access.js";
 import fetchAsync from "./asyncFetch.js";
+import { host } from "./url.js";
 
 const $d = document;
 
@@ -11,11 +12,11 @@ $d.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log("Click");
   const envio = {
-    url: "http://10.0.0.3/global/scripts/register.php",
+    url: "http://" + host + "/global/scripts/register.php",
     method: "POST",
     success: (userInfo) => {
       if (userInfo.PK_Usuario > 0) {
-        access(userInfo);
+        access(userInfo, host);
       } else {
         failed();
       }
@@ -32,6 +33,6 @@ $d.addEventListener("click", (e) => {
   console.log(e.target);
 
   if (e.target === $button) {
-    location.href = "http://10.0.0.3/global/login.html";
+    location.href = "http://" + host + "/global/login.html";
   }
 });

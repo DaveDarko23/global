@@ -152,7 +152,7 @@
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
         $result["imagen"] = $registro['imagen'];
-        $result["nombre"] = $registro['nombre'];
+        $result["nombre"] = $registro['product'];
         $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
@@ -196,7 +196,7 @@
         if($fila=$resultado->fetch_assoc()){
           $result["PK_Producto"] = $fila['PK_Producto'];
           $result["imagen"] = $fila['imagen'];
-          $result["nombre"] = $fila['nombre'];
+          $result["nombre"] = $fila['product'];
           $result["descripcion"] = $fila['descripcion'];
           $result["precio"] = $fila['precio'];
           $result["stock"] = $fila['stock'];
@@ -240,7 +240,7 @@
         include 'conexion.php';
 
         $query = "INSERT INTO producto (
-          imagen, nombre, descripcion, precio, stock, FK_Categoria, FK_Vendedor) 
+          imagen, product, descripcion, precio, stock, FK_Categoria, FK_Vendedor) 
         VALUES 
             (?,?,?,?,?,?,?)";
     
@@ -265,7 +265,7 @@
 
         $query = "UPDATE producto SET
                 imagen='$producto->imagen',
-                nombre = '$producto->name',
+                product = '$producto->name',
                 descripcion = '$producto->descripcion',
                 precio = '$producto->precio',
                 stock = '$producto->stock',
@@ -396,7 +396,7 @@
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
         $result["imagen"] = $registro['imagen'];
-        $result["nombre"] = $registro['nombre'];
+        $result["nombre"] = $registro['product'];
         $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
@@ -431,7 +431,7 @@
       while($registro = mysqli_fetch_array($resultado)){
         $result["PK_Producto"] = $registro['PK_Producto'];
         $result["imagen"] = $registro['imagen'];
-        $result["nombre"] = $registro['nombre'];
+        $result["nombre"] = $registro['product'];
         $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];
@@ -470,7 +470,7 @@
         $result["PK_Producto"] = $registro['PK_Producto'];
         $result["PK_Carrito"] = $registro['PK_Carrito'];
         $result["imagen"] = $registro['imagen'];
-        $result["nombre"] = $registro['nombre'];
+        $result["nombre"] = $registro['product'];
         $result["descripcion"] = $registro['descripcion'];
         $result["precio"] = $registro['precio'];
         $result["stock"] = $registro['stock'];

@@ -21,7 +21,7 @@
 
     class Response{
       public $username = "";
-      public $userType = "Vendedor";
+      public $userType = "vendedor";
       public $PK_Usuario = "";
       public $PK_Type = "";
     }

@@ -1,5 +1,6 @@
 import fetchAsync from "./asyncFetch.js";
 import navController, { clickListener } from "./navegacion.js";
+import { host } from "./url.js";
 
 const $d = document;
 let statusType = "";
@@ -8,7 +9,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType === null) {
-    location.href = "http://10.0.0.3/global";
+    location.href = "http://" + host + "/global";
   }
 
   navController(statusType, $d);
@@ -18,7 +19,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 const getProducts = () => {
   const envio = {
-    url: "http://10.0.0.3/global/scripts/compras.php",
+    url: "http://" + host + "/global/scripts/compras.php",
     method: "POST",
     success: (userInfo) => {
       if (userInfo.length === 0) {
@@ -60,7 +61,7 @@ const fillCards = (userInfo) => {
         $h5.textContent = "Comprado";
       }
     }*/
-    if (localStorage.getItem("userType") === "Comprador") {
+    if (localStorage.getItem("userType") === "comprador") {
       if (element.status == 1) {
         // Pedido pero no entregado
         $cardTemplate.querySelector("card").style.backgroundColor = "#ffff72";
@@ -72,7 +73,7 @@ const fillCards = (userInfo) => {
       }
     }
 
-    if (localStorage.getItem("userType") === "Vendedor") {
+    if (localStorage.getItem("userType") === "vendedor") {
       const $nodo = $d.createElement("button");
       $cardTemplate
         .querySelector(".product-buttons")
@@ -118,7 +119,7 @@ const cardsInteraction = () => {
 
       if ($enviar === e.target) {
         const Envio = {
-          url: "http://10.0.0.3/global/scripts/sendProduct.php",
+          url: "http://" + host + "/global/scripts/sendProduct.php",
           method: "POST",
           success: (userInfo) => {
             alert("Producto Enviado");
@@ -137,5 +138,5 @@ const cardsInteraction = () => {
 };
 
 $d.addEventListener("click", (e) => {
-  clickListener(e);
+  clickListener(e, host);
 });

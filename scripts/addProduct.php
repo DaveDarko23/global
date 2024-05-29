@@ -54,7 +54,7 @@
             //Mostramos el mensaje de que se ha subido co éxito
             //Mostramos la imagen subida
             // echo '<p><img src="images/'.$archivo.'"></p>';
-            $imagen = "http://10.0.0.3/images/".$FK_Vendedor.'/'.$archivo;
+            $imagen = "http://192.168.1.154/images/".$FK_Vendedor.'/'.$archivo;
             $producto = new Producto();
             $producto->createProduct($imagen, $name, $descripcion, $precio,$stock,$categoria, $FK_Vendedor);
             include 'querys.php';

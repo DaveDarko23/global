@@ -5,7 +5,7 @@
       $FK_Usuario = $_POST["FK_Usuario"];
       $userType = $_POST["field"];
 
-      if(strcmp($userType,"Vendedor")===0){
+      if(strcmp($userType,"vendedor")===0){
         echo json_encode(Database::getVentas($FK_Usuario));
       }else{
         echo json_encode(Database::getCarritoList($FK_Usuario, ">"));

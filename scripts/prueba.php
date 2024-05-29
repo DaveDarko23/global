@@ -11,7 +11,7 @@ function sendMail($id,$reciever){
 	$mail->IsSMTP();
 	$mail->SMTPAuth = true;
 	$mail->Username = "a22110098@ceti.mx"; // Correo Enviador
-	$mail->Password = "resident evil 12357"; // Contraseña
+	$mail->Password = ""; // Contraseña
 	$mail->SMTPSecure = "tls";
 	$mail->Port = 587;
 	$mail->AddAddress($reciever);

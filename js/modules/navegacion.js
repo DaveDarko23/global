@@ -13,14 +13,14 @@ const navController = (statusType, $doc) => {
     addLi($nav, "Iniciar Sesión");
   }
 
-  if (statusType === "Vendedor") {
+  if (statusType === "vendedor") {
     addLi($nav, "Cerrar Sesión");
     addLi($nav, "Compras");
     addLi($nav, "Agregar Producto");
     addLi($nav, "Home");
   }
 
-  if (statusType === "Comprador") {
+  if (statusType === "comprador") {
     addLi($nav, "Cerrar Sesión");
     addLi($nav, "Compras");
     addLi($nav, "Carrito");
@@ -29,8 +29,8 @@ const navController = (statusType, $doc) => {
   }
 };
 
-export const clickListener = (e) => {
-  const url = "http://10.0.0.3/global/";
+export const clickListener = (e, host) => {
+  const url = "http://" + host + "/global/";
   switch (e.target.innerHTML) {
     case "Iniciar Sesión":
       location.href = url + "login.html";

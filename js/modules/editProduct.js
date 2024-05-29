@@ -1,5 +1,6 @@
 import fetchAsync from "./asyncFetch.js";
 import navController, { clickListener } from "./navegacion.js";
+import { host } from "./url.js";
 
 const $d = document;
 let statusImage = "No Actualizado";
@@ -8,14 +9,14 @@ let statusType = "";
 $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
-  if (statusType !== "Vendedor") {
-    location.href = "http://10.0.0.3/global";
+  if (statusType !== "vendedor") {
+    location.href = "http://" + host + "/global";
   }
 
   navController(statusType, $d);
 
   const envioOption = {
-    url: "http://10.0.0.3/global/scripts/getCategories.php",
+    url: "http://" + host + "/global/scripts/getCategories.php",
     method: "POST",
     success: (answer) => {
       const $selector = $d.querySelector("[name='categoria']");
@@ -38,7 +39,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 function getProducts() {
   const envio = {
-    url: "http://10.0.0.3/global/scripts/getProduct.php",
+    url: "http://" + host + "/global/scripts/getProduct.php",
     method: "POST",
     success: (answer) => {
       const $nombre = $d.querySelector("[name=name]"),
@@ -100,12 +101,12 @@ $d.addEventListener("submit", (e) => {
   }
 
   const envio = {
-    url: "http://10.0.0.3/global/scripts/editProduct.php",
+    url: "http://" + host + "/global/scripts/editProduct.php",
     method: "POST",
     success: (answer) => {
       console.log(answer);
       if (answer === 200) {
-        location.href = "http://10.0.0.3/global";
+        location.href = "http://" + host + "/global";
       }
     },
     failed: () => alert("Ocurrió un Accidente"),
@@ -116,5 +117,5 @@ $d.addEventListener("submit", (e) => {
 });
 
 $d.addEventListener("click", (e) => {
-  clickListener(e);
+  clickListener(e, host);
 });

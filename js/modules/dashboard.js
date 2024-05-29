@@ -1,16 +1,18 @@
 import fetchAsync from "./asyncFetch.js";
 import navController, { clickListener } from "./navegacion.js";
+import { host } from "./url.js";
 
 const $d = document;
 let statusType = "";
 
 $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
+  console.log(statusType);
   navController(statusType, $d);
 
   const busqueda = getParameterByName("search");
   let data;
-  if (statusType === "Vendedor") {
+  if (statusType === "vendedor") {
     data = busqueda === "" ? null : busqueda;
     getProducts(
       "sellerDashboard.php",
@@ -31,7 +33,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
     if ($search.value !== "") {
       //alert("Buscar");
       location.href =
-        "http://10.0.0.3/global/index.html?search=" + $search.value;
+        "http://" + url + "/global/index.html?search=" + $search.value;
     } else {
       alert("Escribe un producto para buscar");
     }
@@ -49,7 +51,7 @@ function getParameterByName(name) {
 
 const getProducts = (url, data) => {
   const envio = {
-    url: "http://10.0.0.3/global/scripts/" + url,
+    url: "http://" + host + "/global/scripts/" + url,
     method: "POST",
     success: (userInfo) => {
       const set = new Set();
@@ -115,7 +117,7 @@ const fillCards = (userInfo, categorieSection) => {
         $card.style.backgroundColor = "#ffffff";
         if (
           deleteButton === null &&
-          localStorage.getItem("userType") === "Vendedor"
+          localStorage.getItem("userType") === "vendedor"
         ) {
           const $button = $d.createElement("button");
           $button.classList.add("button");
@@ -144,11 +146,11 @@ const cardsInteraction = () => {
 
   $cards.forEach(($card) => {
     $card.addEventListener("click", (e) => {
-      if (statusType === "Vendedor") {
+      if (statusType === "vendedor") {
         buttonCardControllerVendedor($card, e);
       }
 
-      if (statusType === "Comprador") {
+      if (statusType === "comprador") {
         buttonsCardControllerComprador($card, e);
       }
     });
@@ -161,7 +163,7 @@ function buttonCardControllerVendedor($card, e) {
 
   if ($eliminar === e.target) {
     const Envio = {
-      url: "http://10.0.0.3/global/scripts/deleteProduct.php",
+      url: "http://" + host + "/global/scripts/deleteProduct.php",
       method: "POST",
       success: (userInfo) => {
         location.reload();
@@ -177,7 +179,10 @@ function buttonCardControllerVendedor($card, e) {
 
   if ($editar === e.target) {
     location.href =
-      "http://10.0.0.3/global/edit-product.html?id=" + $card.getAttribute("id");
+      "http://" +
+      host +
+      "/global/edit-product.html?id=" +
+      $card.getAttribute("id");
   }
 }
 
@@ -188,11 +193,11 @@ function buttonsCardControllerComprador($card, e) {
     color = "";
 
   if ($carrito === e.target) {
-    url = "http://10.0.0.3/global/scripts/addCarrito.php";
+    url = "http://" + host + "/global/scripts/addCarrito.php";
     color = "#72cb10";
   }
   if ($deseos === e.target) {
-    url = "http://10.0.0.3/global/scripts/addDeseos.php";
+    url = "http://" + host + "/global/scripts/addDeseos.php";
     color = "#ffff72";
   }
 
@@ -216,5 +221,5 @@ function buttonsCardControllerComprador($card, e) {
 }
 
 $d.addEventListener("click", (e) => {
-  clickListener(e);
+  clickListener(e, host);
 });

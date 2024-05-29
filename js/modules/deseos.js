@@ -1,5 +1,6 @@
 import fetchAsync from "./asyncFetch.js";
 import navController, { clickListener } from "./navegacion.js";
+import { host } from "./url.js";
 
 const $d = document;
 let statusType = "";
@@ -7,8 +8,8 @@ let statusType = "";
 $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
-  if (statusType !== "Comprador") {
-    location.href = "http://10.0.0.3/global";
+  if (statusType !== "comprador") {
+    location.href = "http://" + host + "/global";
   }
 
   navController(statusType, $d);
@@ -18,7 +19,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 const getProducts = () => {
   const envio = {
-    url: "http://10.0.0.3/global/scripts/deseos.php",
+    url: "http://" + host + "/global/scripts/deseos.php",
     method: "POST",
     success: (userInfo) => {
       console.log(userInfo);
@@ -71,11 +72,11 @@ const cardsInteraction = () => {
         color = "";
 
       if ($carrito === e.target) {
-        url = "http://10.0.0.3/global/scripts/addCarrito.php";
+        url = "http://" + host + "/global/scripts/addCarrito.php";
         color = "#72cb10";
       }
       if ($delete === e.target) {
-        url = "http://10.0.0.3/global/scripts/deleteDeseos.php";
+        url = "http://" + host + "/global/scripts/deleteDeseos.php";
         color = "#ffff72";
       }
 
@@ -101,5 +102,5 @@ const cardsInteraction = () => {
 };
 
 $d.addEventListener("click", (e) => {
-  clickListener(e);
+  clickListener(e, host);
 });

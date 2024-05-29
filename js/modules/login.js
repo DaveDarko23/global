@@ -1,47 +1,26 @@
 import access from "./access.js";
 import fetchAsync from "./asyncFetch.js";
+import { host } from "./url.js";
 
 const $d = document;
+console.log(host);
 
 $d.addEventListener("DOMContentLoaded", (e) => {
   console.log(localStorage.getItem("username"));
   if (localStorage.getItem("username") !== null) {
-    location.href = "http://10.0.0.3/global";
+    location.href = "http://" + host + "/global";
   }
-  /*
-  const array = {
-    array: [
-      [5, "Comida"],
-      [35, "Ediardo"],
-      [25, "Prieda"],
-    ],
-  };
-
-  console.log(array);
-  console.log(JSON.stringify(array));
-
-  const envio = {
-    url: "http://10.0.0.3/global/scripts/prueba.php",
-    method: "POST",
-    success: (userInfo) => {
-      alert(userInfo);
-    },
-    failed: () => {},
-    data: JSON.stringify(array),
-  };
-  console.log(envio);
-  fetchAsync(envio);*/
 });
 
 $d.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const envio = {
-    url: "http://10.0.0.3/global/scripts/login.php",
+    url: "http://" + host + "/global/scripts/login.php",
     method: "POST",
     success: (userInfo) => {
       if (userInfo.PK_Usuario > 0) {
-        access(userInfo);
+        access(userInfo, host);
       } else {
         failed();
       }
@@ -59,6 +38,6 @@ $d.addEventListener("click", (e) => {
   console.log(e.target === $button);
 
   if (e.target === $button) {
-    location.href = "http://10.0.0.3/global/register.html";
+    location.href = "http://" + host + "/global/register.html";
   }
 });
