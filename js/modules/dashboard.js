@@ -32,8 +32,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
     console.log($search.value);
     if ($search.value !== "") {
       //alert("Buscar");
-      location.href =
-        "http://" + url + "/global/index.html?search=" + $search.value;
+      location.href = "http://" + url + "/index.html?search=" + $search.value;
     } else {
       alert("Escribe un producto para buscar");
     }
@@ -51,7 +50,7 @@ function getParameterByName(name) {
 
 const getProducts = (url, data) => {
   const envio = {
-    url: "http://" + host + "/global/scripts/" + url,
+    url: "http://" + host + "/scripts/" + url,
     method: "POST",
     success: (userInfo) => {
       const set = new Set();
@@ -163,7 +162,7 @@ function buttonCardControllerVendedor($card, e) {
 
   if ($eliminar === e.target) {
     const Envio = {
-      url: "http://" + host + "/global/scripts/deleteProduct.php",
+      url: "http://" + host + "/scripts/deleteProduct.php",
       method: "POST",
       success: (userInfo) => {
         location.reload();
@@ -179,10 +178,7 @@ function buttonCardControllerVendedor($card, e) {
 
   if ($editar === e.target) {
     location.href =
-      "http://" +
-      host +
-      "/global/edit-product.html?id=" +
-      $card.getAttribute("id");
+      "http://" + host + "/edit-product.html?id=" + $card.getAttribute("id");
   }
 }
 
@@ -193,11 +189,11 @@ function buttonsCardControllerComprador($card, e) {
     color = "";
 
   if ($carrito === e.target) {
-    url = "http://" + host + "/global/scripts/addCarrito.php";
+    url = "http://" + host + "/scripts/addCarrito.php";
     color = "#72cb10";
   }
   if ($deseos === e.target) {
-    url = "http://" + host + "/global/scripts/addDeseos.php";
+    url = "http://" + host + "/scripts/addDeseos.php";
     color = "#ffff72";
   }
 

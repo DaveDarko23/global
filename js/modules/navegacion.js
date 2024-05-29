@@ -30,7 +30,7 @@ const navController = (statusType, $doc) => {
 };
 
 export const clickListener = (e, host) => {
-  const url = "http://" + host + "/global/";
+  const url = "http://" + host + "/";
   switch (e.target.innerHTML) {
     case "Iniciar Sesión":
       location.href = url + "login.html";

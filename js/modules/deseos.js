@@ -9,7 +9,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType !== "comprador") {
-    location.href = "http://" + host + "/global";
+    location.href = "http://" + host + "";
   }
 
   navController(statusType, $d);
@@ -19,7 +19,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 const getProducts = () => {
   const envio = {
-    url: "http://" + host + "/global/scripts/deseos.php",
+    url: "http://" + host + "/scripts/deseos.php",
     method: "POST",
     success: (userInfo) => {
       console.log(userInfo);
@@ -72,11 +72,11 @@ const cardsInteraction = () => {
         color = "";
 
       if ($carrito === e.target) {
-        url = "http://" + host + "/global/scripts/addCarrito.php";
+        url = "http://" + host + "/scripts/addCarrito.php";
         color = "#72cb10";
       }
       if ($delete === e.target) {
-        url = "http://" + host + "/global/scripts/deleteDeseos.php";
+        url = "http://" + host + "/scripts/deleteDeseos.php";
         color = "#ffff72";
       }
 

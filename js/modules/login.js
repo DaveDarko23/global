@@ -8,7 +8,7 @@ console.log(host);
 $d.addEventListener("DOMContentLoaded", (e) => {
   console.log(localStorage.getItem("username"));
   if (localStorage.getItem("username") !== null) {
-    location.href = "http://" + host + "/global";
+    location.href = "http://" + host + "";
   }
 });
 
@@ -16,7 +16,7 @@ $d.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const envio = {
-    url: "http://" + host + "/global/scripts/login.php",
+    url: "http://" + host + "/scripts/login.php",
     method: "POST",
     success: (userInfo) => {
       if (userInfo.PK_Usuario > 0) {
@@ -38,6 +38,6 @@ $d.addEventListener("click", (e) => {
   console.log(e.target === $button);
 
   if (e.target === $button) {
-    location.href = "http://" + host + "/global/register.html";
+    location.href = "http://" + host + "/register.html";
   }
 });

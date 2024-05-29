@@ -7,10 +7,10 @@ let statusType = "";
 
 $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
-  if (statusType !== "vendedor") location.href = "http://" + host + "/global";
+  if (statusType !== "vendedor") location.href = "http://" + host + "";
 
   const envio = {
-    url: "http://" + host + "/global/scripts/getCategories.php",
+    url: "http://" + host + "/scripts/getCategories.php",
     method: "POST",
     success: (answer) => {
       const $selector = $d.querySelector("[name='categoria']");
@@ -36,11 +36,11 @@ $d.addEventListener("submit", (e) => {
   $fk.setAttribute("value", localStorage.getItem("PK_Type"));
   console.log($fk);
   const envio = {
-    url: "http://" + host + "/global/scripts/addProduct.php",
+    url: "http://" + host + "/scripts/addProduct.php",
     method: "POST",
     success: (answer) => {
       if (answer === 200) {
-        location.href = "http://" + host + "/global";
+        location.href = "http://" + host + "";
       }
     },
     failed: () => alert("Ocurrió un Accidente"),
@@ -78,7 +78,7 @@ const navController = () => {
 };
 
 $d.addEventListener("click", (e) => {
-  const url = "http://" + host + "/global/";
+  const url = "http://" + host + "/";
   console.log("Nav URL: " + url);
   switch (e.target.innerHTML) {
     case "Iniciar Sesión":

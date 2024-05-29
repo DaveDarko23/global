@@ -62,6 +62,13 @@ ALTER TABLE Producto CHANGE COLUMN PK_Imagen PK_Producto int PRIMARY KEY AUTO_IN
 
 ALTER TABLE carrito CHANGEL COLUMN cantidad int default 0;
 
+ALTER TABLE carrito CHANGE COLUMN Status status tinyint default 0;
+
+ALTER TABLE producto CHANGE COLUMN imagen imagen varchar (100);
+  ALTER TABLE producto CHANGE COLUMN product product varchar (100) CHARACTER SET utf8;
+  ALTER TABLE producto CHANGE COLUMN descripcion descripcion varchar (100) CHARACTER SET utf8;
+
+
 ALTER TABLE producto ADD categoria varchar (50) after stock;
 
 UPDATE producto SET categoria = "Tecnologia";

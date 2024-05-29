@@ -10,13 +10,13 @@ $d.addEventListener("DOMContentLoaded", (e) => {
   statusType = localStorage.getItem("userType");
 
   if (statusType !== "vendedor") {
-    location.href = "http://" + host + "/global";
+    location.href = "http://" + host + "";
   }
 
   navController(statusType, $d);
 
   const envioOption = {
-    url: "http://" + host + "/global/scripts/getCategories.php",
+    url: "http://" + host + "/scripts/getCategories.php",
     method: "POST",
     success: (answer) => {
       const $selector = $d.querySelector("[name='categoria']");
@@ -39,7 +39,7 @@ $d.addEventListener("DOMContentLoaded", (e) => {
 
 function getProducts() {
   const envio = {
-    url: "http://" + host + "/global/scripts/getProduct.php",
+    url: "http://" + host + "/scripts/getProduct.php",
     method: "POST",
     success: (answer) => {
       const $nombre = $d.querySelector("[name=name]"),
@@ -101,12 +101,12 @@ $d.addEventListener("submit", (e) => {
   }
 
   const envio = {
-    url: "http://" + host + "/global/scripts/editProduct.php",
+    url: "http://" + host + "/scripts/editProduct.php",
     method: "POST",
     success: (answer) => {
       console.log(answer);
       if (answer === 200) {
-        location.href = "http://" + host + "/global";
+        location.href = "http://" + host + "";
       }
     },
     failed: () => alert("Ocurrió un Accidente"),

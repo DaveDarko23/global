@@ -10,7 +10,7 @@
     $array2 = $array["array"];
 
     $random = rand(0, 99999999999);
-    $url = "http://192.168.1.154/global/pdf/mail-".$random.".pdf";
+    $url = "http://192.168.1.154/pdf/mail-".$random.".pdf";
 
     foreach ($array2 as $user){
       list($id, $name, $Cantidad, $precio) = $user;
