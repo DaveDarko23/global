@@ -27,6 +27,11 @@ create table comprador (
   FOREIGN KEY (FK_Estado) REFERENCES entidad(PK_Estado)
 );
 
+create table categoria (
+  PK_Categoria int PRIMARY KEY AUTO_INCREMENT,
+  categoria varchar (50)
+);
+
 create table producto (
   PK_Producto int PRIMARY KEY AUTO_INCREMENT,
   imagen varchar (100),
@@ -34,7 +39,8 @@ create table producto (
   descripcion varchar (1000) CHARACTER SET utf8,
   precio float,
   stock int,
-  categoria varchar (50),
+  FK_Categoria int,
+  FOREIGN KEY (FK_Categoria) REFERENCES categoria(PK_Categoria),
   FK_Vendedor int,
   FOREIGN KEY (FK_Vendedor) REFERENCES vendedor(PK_Administrador)
 );
@@ -58,10 +64,7 @@ create table Deseos (
   FOREIGN KEY (FK_Producto) REFERENCES producto(PK_Producto)
 );
 
-create table categoria (
-  PK_Categoria int PRIMARY KEY AUTO_INCREMENT,
-  categoria varchar (50)
-);
+
 
 ALTER TABLE Producto CHANGE COLUMN PK_Imagen PK_Producto int PRIMARY KEY AUTO_INCREMENT;
 
