@@ -58,6 +58,11 @@ create table Deseos (
   FOREIGN KEY (FK_Producto) REFERENCES producto(PK_Producto)
 );
 
+create table categoria (
+  PK_Categoria int PRIMARY KEY AUTO_INCREMENT,
+  categoria varchar (50)
+);
+
 ALTER TABLE Producto CHANGE COLUMN PK_Imagen PK_Producto int PRIMARY KEY AUTO_INCREMENT;
 
 ALTER TABLE carrito CHANGEL COLUMN cantidad int default 0;
